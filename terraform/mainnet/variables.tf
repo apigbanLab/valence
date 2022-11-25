@@ -107,3 +107,33 @@ variable "service_gateway_display_name" {
   type        = string
   default     = "sgw"
 }
+
+# Public subnet parameters
+variable "subnet_public_cidr_block" {
+    default = "10.0.1.0/24"
+}
+
+variable "subnet_public_dns_label" {
+    default = "public"
+}
+
+variable "subnet_public_prohibit_public_ip_on_vnic" {
+    type = bool
+    description = "VNICs created in a public subnet will be provided a public IP"
+    default = false
+}
+
+# Private subnet parameters
+variable "subnet_private_cidr_block" {
+    default = "10.0.201.0/24"
+}
+
+variable "subnet_private_dns_label" {
+    default = "private"
+}
+
+variable "subnet_private_prohibit_public_ip_on_vnic" {
+    type = bool
+    description = "VNICs created in a private subnet will not be provided a public IP"
+    default = true
+}
