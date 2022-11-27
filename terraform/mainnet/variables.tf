@@ -110,30 +110,70 @@ variable "service_gateway_display_name" {
 
 # Public subnet parameters
 variable "subnet_public_cidr_block" {
-    default = "10.0.1.0/24"
+  default = "10.0.1.0/24"
 }
 
 variable "subnet_public_dns_label" {
-    default = "public"
+  default = "public"
 }
 
 variable "subnet_public_prohibit_public_ip_on_vnic" {
-    type = bool
-    description = "VNICs created in a public subnet will be provided a public IP"
-    default = false
+  type        = bool
+  description = "VNICs created in a public subnet will be provided a public IP"
+  default     = false
 }
 
 # Private subnet parameters
 variable "subnet_private_cidr_block" {
-    default = "10.0.201.0/24"
+  default = "10.0.201.0/24"
 }
 
 variable "subnet_private_dns_label" {
-    default = "private"
+  default = "private"
 }
 
 variable "subnet_private_prohibit_public_ip_on_vnic" {
-    type = bool
-    description = "VNICs created in a private subnet will not be provided a public IP"
-    default = true
+  type        = bool
+  description = "VNICs created in a private subnet will not be provided a public IP"
+  default     = true
+}
+
+# Internet enabled Route table  parameters
+variable "route_igw_display_name" {
+  default = "igw"
+}
+
+variable "route_igw_target_cidr_block" {
+  default = "0.0.0.0/0"
+}
+
+# Security list parameters
+variable "sec_public_access" {
+  description = "A list of CIDR blocks to which access to public access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
+  default     = ["anywhere"]
+  type        = list(any)
+}
+
+variable "sec_wireguard_access" {
+  description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
+  default     = ["anywhere"]
+  type        = list(any)
+}
+
+variable "sec_icmp_access" {
+  description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
+  default     = ["anywhere"]
+  type        = list(any)
+}
+
+variable "sec_netnum" {
+  description = "0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value."
+  default     = 3
+  type        = number
+}
+
+variable "sec_newbits" {
+  description = "The difference between the VCN's netmask and the desired subnet mask"
+  default     = 13
+  type        = number
 }
