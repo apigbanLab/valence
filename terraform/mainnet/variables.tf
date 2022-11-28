@@ -177,3 +177,62 @@ variable "sec_newbits" {
   default     = 13
   type        = number
 }
+
+# vm instance parameters
+variable "vm_ssh_authorized_keys" {
+  description = "ssh"
+  type        = string
+}
+
+variable "vm_shape" {
+  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+  type        = string
+  default     = "VM.Standard.A1.Flex"
+}
+
+variable "vm_shape_config" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "12"
+    ocpus         = "2"
+  }
+}
+
+variable "vm_is_pv_encryption_in_transit_enabled" {
+  description = "Whether to enable in-transit encryption for the data volume's paravirtualized attachment."
+  type        = bool
+  default     = true
+}
+
+variable "vm_instance_options" {
+  type = map(any)
+  default = {
+    are_legacy_imds_endpoints_disabled = true
+  }
+}
+
+variable "vm_availability_config" {
+  type = map(any)
+  default = {
+    recovery_action = "RESTORE_INSTANCE"
+  }
+}
+
+variable "vm_availability_domain" {
+  type    = string
+  default = "ChLp:ME-DUBAI-1-AD-1"
+}
+
+variable "vm_public_instance_name" {
+  type    = string
+  default = "one"
+}
+
+variable "vm_image_source_details" {
+  type = map(any)
+  default = {
+    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+    source_type = "image"
+  }
+}
