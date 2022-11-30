@@ -1,0 +1,32 @@
+---
+ansible_python_interpreter:  '/usr/bin/python3'
+ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+ansible_user: "{{ ansible.ssh_user }}"
+ansible_ssh_pass: "{{ ansible.ssh_pass }}"
+ansible_become_pass: "{{ ansible.become_pass }}"
+ansible_ssh_private_key_file: "{{ ansible.ssh_private_key_file }}"
+
+default:
+  apt_pkgs:
+    - python3-pip
+    - python3-setuptools
+    - git
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - wget
+    - vim
+    - gnupg-agent
+    - software-properties-common
+    - mosh
+    - pydf
+    - mtr
+    - htop
+    - iftop
+    - net-tools  
+    - nmap
+    - iperf
+    - python3-sshtunnel
+    - ansible
+
+  home_dir: "{{ mount.datadisk_01 }}/home"
