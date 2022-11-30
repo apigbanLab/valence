@@ -34,3 +34,6 @@ override.tf.json
 terraform.rc
 valence.code-workspace
 server-config/host_vars/*
+nocommit/*
+vault.yaml
+vaultpass
