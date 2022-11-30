@@ -52,6 +52,7 @@ resource "oci_core_volume" "disk-one" {
   availability_domain = var.vm_availability_domain
   size_in_gbs         = var.volume_size_in_gbs
   #Optional
+  display_name = var.volume_display_name
   autotune_policies {
     #Required
     autotune_type = var.volume_autotune_policies_autotune_type

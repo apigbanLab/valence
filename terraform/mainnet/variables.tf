@@ -235,6 +235,11 @@ variable "vm_image_source_details" {
   }
 }
 
+variable "volume_display_name" {
+  type    = string
+  default = "disk-one"
+}
+
 variable "volume_attachment_attachment_type" {
   type    = string
   default = "paravirtualized"
