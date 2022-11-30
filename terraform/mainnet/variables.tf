@@ -259,3 +259,13 @@ variable "volume_size_in_gbs" {
   type    = string
   default = "50"
 }
+
+variable "volume_attachment_display_name" {
+  type    = string
+  default = "disk-one-attachment"
+}
+
+variable "volume_is_pv_encryption_in_transit_enabled" {
+  type    = bool
+  default = true
+}
