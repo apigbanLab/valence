@@ -45,3 +45,35 @@ resource "oci_core_instance" "public" {
     }
   }
 }
+
+resource "oci_core_volume" "disk-one" {
+  #Required
+  compartment_id      = var.provider_compartment_id
+  availability_domain = var.vm_availability_domain
+  size_in_gbs         = var.volume_size_in_gbs
+  #Optional
+  autotune_policies {
+    #Required
+    autotune_type = var.volume_autotune_policies_autotune_type
+    #Optional
+    max_vpus_per_gb = var.volume_autotune_policies_max_vpus_per_gb
+  }
+  vpus_per_gb = var.volume_vpus_per_gb
+}
+
+# resource "oci_core_volume_attachment" "disk-one-attachment" {
+#     #Required
+#     attachment_type = var.volume_attachment_attachment_type
+#     instance_id = oci_core_instance.public.id
+#     volume_id = oci_core_volume.disk-one.id
+
+#     #Optional
+#     device = var.volume_attachment_device
+#     display_name = var.volume_attachment_display_name
+#     encryption_in_transit_type = var.volume_attachment_encryption_in_transit_type
+#     is_agent_auto_iscsi_login_enabled = var.volume_attachment_is_agent_auto_iscsi_login_enabled
+#     is_pv_encryption_in_transit_enabled = var.volume_attachment_is_pv_encryption_in_transit_enabled
+#     is_read_only = var.volume_attachment_is_read_only
+#     is_shareable = var.volume_attachment_is_shareable
+#     use_chap = var.volume_attachment_use_chap
+# }

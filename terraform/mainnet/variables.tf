@@ -234,3 +234,28 @@ variable "vm_image_source_details" {
     source_type = "image"
   }
 }
+
+variable "volume_attachment_attachment_type" {
+  type    = string
+  default = "paravirtualized"
+}
+
+variable "volume_autotune_policies_autotune_type" {
+  type    = string
+  default = "PERFORMANCE_BASED"
+}
+
+variable "volume_autotune_policies_max_vpus_per_gb" {
+  type    = string
+  default = "20"
+}
+
+variable "volume_vpus_per_gb" {
+  type    = string
+  default = "10"
+}
+
+variable "volume_size_in_gbs" {
+  type    = string
+  default = "50"
+}
