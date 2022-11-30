@@ -205,11 +205,9 @@ variable "vm_is_pv_encryption_in_transit_enabled" {
   default     = true
 }
 
-variable "vm_instance_options" {
-  type = map(any)
-  default = {
-    are_legacy_imds_endpoints_disabled = true
-  }
+variable "vm_are_legacy_imds_endpoints_disabled" {
+  type    = string
+  default = true
 }
 
 variable "vm_availability_config" {
