@@ -1,0 +1,9 @@
+---
+- hosts: one
+  become: yes
+  tasks:
+  
+  - name: checkout server-config repo
+    ansible.builtin.git:
+      repo: 'https://github.com/apigbanLab/valence.git'
+      dest: /root/valence
