@@ -14,3 +14,13 @@ resource "local_file" "tf_one_AnsibleInventory" {
   )
   filename = "../server-config/host_vars/${oci_core_instance.public.display_name}.yaml"
 }
+
+resource "null_resource" "server-config-prep" {
+  provisioner "local-exec" {
+    command = "ansible-playbook ../server-config/tasks/main.yaml -i ../server-config/inventory.yaml --vault-password-file ../nocommit/vaultpass"
+  }
+
+  depends_on = [
+    oci_core_instance.public
+  ]
+}
