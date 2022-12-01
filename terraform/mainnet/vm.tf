@@ -1,3 +1,8 @@
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "oci_core_instance" "public" {
   display_name                        = var.vm_public_instance_name
   is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
@@ -5,7 +10,7 @@ resource "oci_core_instance" "public" {
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_shape
   metadata = {
-    "ssh_authorized_keys" = var.vm_ssh_authorized_keys
+    "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
 
   shape_config {
@@ -44,6 +49,11 @@ resource "oci_core_instance" "public" {
       name          = "Bastion"
     }
   }
+
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../../server-config/'${oci_core_instance.public.display_name}.privkey'"
+  }
+
 }
 
 resource "oci_core_volume" "disk-one" {
