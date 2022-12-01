@@ -51,7 +51,7 @@ resource "oci_core_instance" "public" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../../server-config/'${oci_core_instance.public.display_name}.privkey'"
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
   }
 
 }
