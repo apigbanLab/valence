@@ -1,0 +1,16 @@
+ansible_host: ${server-public-ipv4}
+ansible_port: 22
+
+datadisk:
+  id: ${server-disk-id}
+  name: ${server-disk-name}
+
+mount:
+  datadisk_01: /mnt/${server-disk-name}
+
+host:
+  name: ${server-name}
+  private_ipv4: ${server-private-ipv4}
+  public_ipv4: ${server-public-ipv4}
+  port: 22
+  privkey_path: ${server-name}.privkey

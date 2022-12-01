@@ -33,3 +33,8 @@ override.tf.json
 .terraformrc
 terraform.rc
 valence.code-workspace
+server-config/host_vars/*
+nocommit/*
+vault.yaml
+vaultpass
+*.privkey

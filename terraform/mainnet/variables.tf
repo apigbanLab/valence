@@ -178,12 +178,6 @@ variable "sec_newbits" {
   type        = number
 }
 
-# vm instance parameters
-variable "vm_ssh_authorized_keys" {
-  description = "ssh"
-  type        = string
-}
-
 variable "vm_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
@@ -235,6 +229,11 @@ variable "vm_image_source_details" {
   }
 }
 
+variable "volume_display_name" {
+  type    = string
+  default = "disk-one"
+}
+
 variable "volume_attachment_attachment_type" {
   type    = string
   default = "paravirtualized"
@@ -268,4 +267,9 @@ variable "volume_attachment_display_name" {
 variable "volume_is_pv_encryption_in_transit_enabled" {
   type    = bool
   default = true
+}
+
+variable "key_name" {
+  type    = string
+  default = "ssh_key"
 }
