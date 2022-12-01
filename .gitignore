@@ -37,3 +37,4 @@ server-config/host_vars/*
 nocommit/*
 vault.yaml
 vaultpass
+*.privkey
