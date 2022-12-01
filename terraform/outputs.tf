@@ -12,5 +12,5 @@ resource "local_file" "tf_one_AnsibleInventory" {
     }
 
   )
-  filename = "../../server-config/host_vars/${oci_core_instance.public.display_name}.yaml"
+  filename = "../server-config/host_vars/${oci_core_instance.public.display_name}.yaml"
 }
