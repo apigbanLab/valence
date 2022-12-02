@@ -15,6 +15,9 @@
    "settings":{
       
    },
+   "runArgs": [
+      "--shm-size=5gb"
+  ],
    "extensions":[
       "hashicorp.terraform",
       "aaron-bond.better-comments",
