@@ -178,18 +178,27 @@ variable "sec_newbits" {
   type        = number
 }
 
-variable "vm_shape" {
+variable "vm_server_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
   default     = "VM.Standard.A1.Flex"
 }
 
-variable "vm_shape_config" {
+variable "vm_k3s_server_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
-    memory_in_gbs = "12"
-    ocpus         = "2"
+    memory_in_gbs = "6"
+    ocpus         = "1"
+  }
+}
+
+variable "vm_k3s_agent_shape_config" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "6"
+    ocpus         = "1"
   }
 }
 
@@ -256,12 +265,12 @@ variable "volume_vpus_per_gb" {
 
 variable "volume_size_in_gbs" {
   type    = string
-  default = "50"
+  default = "40"
 }
 
 variable "volume_attachment_display_name" {
   type    = string
-  default = "disk-one-attachment"
+  default = "disk-attachment"
 }
 
 variable "volume_is_pv_encryption_in_transit_enabled" {
