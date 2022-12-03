@@ -3,8 +3,8 @@ resource "tls_private_key" "ssh_key" {
   rsa_bits  = 4096
 }
 
-resource "oci_core_instance" "k3s-server" {
-  display_name                        = var.vm_public_instance_name
+resource "oci_core_instance" "k3s-server-01" {
+  display_name                        = "k3s-server-01"
   is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
@@ -14,8 +14,114 @@ resource "oci_core_instance" "k3s-server" {
   }
 
   shape_config {
-    memory_in_gbs = var.vm_shape_config.memory_in_gbs
-    ocpus         = var.vm_shape_config.ocpus
+    memory_in_gbs = var.vm_k3s_server_shape_config.memory_in_gbs
+    ocpus         = var.vm_k3s_server_shape_config.ocpus
+  }
+
+  create_vnic_details {
+    assign_private_dns_record = "true"
+    assign_public_ip          = "true"
+    subnet_id                 = oci_core_subnet.public_subnet.id
+  }
+
+  availability_config {
+    recovery_action = var.vm_availability_config.recovery_action
+  }
+
+  source_details {
+    source_id   = var.vm_image_source_details.source_id
+    source_type = var.vm_image_source_details.source_type
+  }
+
+  agent_config {
+    is_management_disabled = "false"
+    is_monitoring_disabled = "false"
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Vulnerability Scanning"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Compute Instance Monitoring"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Bastion"
+    }
+  }
+
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
+  }
+
+}
+
+resource "oci_core_instance" "k3s-agent-01" {
+  display_name                        = "k3s-agent-01"
+  is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+  availability_domain                 = var.vm_availability_domain
+  compartment_id                      = var.provider_compartment_id
+  shape                               = var.vm_shape
+  metadata = {
+    "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
+  }
+
+  shape_config {
+    memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs
+    ocpus         = var.vm_k3s_agent_shape_config.ocpus
+  }
+
+  create_vnic_details {
+    assign_private_dns_record = "true"
+    assign_public_ip          = "true"
+    subnet_id                 = oci_core_subnet.public_subnet.id
+  }
+
+  availability_config {
+    recovery_action = var.vm_availability_config.recovery_action
+  }
+
+  source_details {
+    source_id   = var.vm_image_source_details.source_id
+    source_type = var.vm_image_source_details.source_type
+  }
+
+  agent_config {
+    is_management_disabled = "false"
+    is_monitoring_disabled = "false"
+    plugins_config {
+      desired_state = "DISABLED"
+      name          = "Vulnerability Scanning"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Compute Instance Monitoring"
+    }
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Bastion"
+    }
+  }
+
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
+  }
+
+}
+
+resource "oci_core_instance" "k3s-agent-02" {
+  display_name                        = "k3s-agent-02"
+  is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+  availability_domain                 = var.vm_availability_domain
+  compartment_id                      = var.provider_compartment_id
+  shape                               = var.vm_shape
+  metadata = {
+    "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
+  }
+
+  shape_config {
+    memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs
+    ocpus         = var.vm_k3s_agent_shape_config.ocpus
   }
 
   create_vnic_details {
