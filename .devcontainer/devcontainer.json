@@ -19,17 +19,17 @@
       "--shm-size=5gb"
   ],
    "extensions":[
-      "hashicorp.terraform",
-      "aaron-bond.better-comments",
-      "vscode.json-language-features",
-      "redhat.vscode-yaml",
-      "vscode.git",
-      "vscode.git-base",
-      "vscode.github",
-      "vscode.github-authentication",
-      "mohsen1.prettify-json",
-      "MarkLarah.pre-commit-vscode"
-   ],
-   "remoteUser":"vscode",
-   "containerUser": "vscode"
+	"hashicorp.terraform",
+	"aaron-bond.better-comments",
+	"vscode.json-language-features",
+	"redhat.vscode-yaml",
+	"vscode.git",
+	"vscode.git-base",
+	"vscode.github",
+	"vscode.github-authentication",
+	"mohsen1.prettify-json",
+	"MarkLarah.pre-commit-vscode"
+],
+   "remoteUser":"root",
+   "containerUser": "root"
 }
