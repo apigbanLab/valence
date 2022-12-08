@@ -49,6 +49,10 @@ resource "oci_core_instance" "k3s-server-01" {
       name          = "Bastion"
     }
   }
+
+  instance_options {
+    are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
+  }
 }
 
 resource "oci_core_instance" "k3s-agent-01" {
@@ -98,6 +102,9 @@ resource "oci_core_instance" "k3s-agent-01" {
     }
   }
 
+  instance_options {
+    are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
+  }
 }
 
 resource "oci_core_instance" "k3s-agent-02" {
@@ -145,6 +152,10 @@ resource "oci_core_instance" "k3s-agent-02" {
       desired_state = "ENABLED"
       name          = "Bastion"
     }
+  }
+
+  instance_options {
+    are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
   }
 
   provisioner "local-exec" {
