@@ -16,20 +16,20 @@ variable "provider_label_prefix" {
   default     = "terraform-oci"
 }
 
-variable "tags_freeform" {
-  description = "simple key-value pairs to tag the created resources using freeform OCI Free-form tags."
-  type        = map(any)
-  default = {
-    terraformed = "please do not edit manually"
-    module      = "oracle-terraform-modules/vcn/oci"
-  }
-}
+# variable "tags_freeform" {
+#   description = "simple key-value pairs to tag the created resources using freeform OCI Free-form tags."
+#   type        = map(any)
+#   default = {
+#     terraformed = "please do not edit manually"
+#     module      = "oracle-terraform-modules/vcn/oci"
+#   }
+# }
 
-variable "tags_defined" {
-  description = "predefined and scoped to a namespace to tag the resources created using defined tags."
-  type        = map(string)
-  default     = null
-}
+# variable "tags_defined" {
+#   description = "predefined and scoped to a namespace to tag the resources created using defined tags."
+#   type        = map(string)
+#   default     = null
+# }
 
 # vcn parameters
 
@@ -51,11 +51,11 @@ variable "create_service_gateway" {
   default     = false
 }
 
-variable "enable_ipv6" {
-  description = "Whether IPv6 is enabled for the VCN. If enabled, Oracle will assign the VCN a IPv6 /56 CIDR block."
-  type        = bool
-  default     = false
-}
+# variable "enable_ipv6" {
+#   description = "Whether IPv6 is enabled for the VCN. If enabled, Oracle will assign the VCN a IPv6 /56 CIDR block."
+#   type        = bool
+#   default     = false
+# }
 
 variable "lockdown_default_seclist" {
   description = "whether to remove all default security rules from the VCN Default Security List"
@@ -96,17 +96,17 @@ variable "internet_gateway_display_name" {
   default     = "igw"
 }
 
-variable "nat_gateway_display_name" {
-  description = "(Updatable) Name of NAT Gateway. Does not have to be unique."
-  type        = string
-  default     = "ngw"
-}
+# variable "nat_gateway_display_name" {
+#   description = "(Updatable) Name of NAT Gateway. Does not have to be unique."
+#   type        = string
+#   default     = "ngw"
+# }
 
-variable "service_gateway_display_name" {
-  description = "(Updatable) Name of Service Gateway. Does not have to be unique."
-  type        = string
-  default     = "sgw"
-}
+# variable "service_gateway_display_name" {
+#   description = "(Updatable) Name of Service Gateway. Does not have to be unique."
+#   type        = string
+#   default     = "sgw"
+# }
 
 # Public subnet parameters
 variable "subnet_public_cidr_block" {
@@ -160,23 +160,23 @@ variable "sec_wireguard_access" {
   type        = list(any)
 }
 
-variable "sec_icmp_access" {
-  description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["anywhere"]
-  type        = list(any)
-}
+# variable "sec_icmp_access" {
+#   description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
+#   default     = ["anywhere"]
+#   type        = list(any)
+# }
 
-variable "sec_netnum" {
-  description = "0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value."
-  default     = 3
-  type        = number
-}
+# variable "sec_netnum" {
+#   description = "0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value."
+#   default     = 3
+#   type        = number
+# }
 
-variable "sec_newbits" {
-  description = "The difference between the VCN's netmask and the desired subnet mask"
-  default     = 13
-  type        = number
-}
+# variable "sec_newbits" {
+#   description = "The difference between the VCN's netmask and the desired subnet mask"
+#   default     = 13
+#   type        = number
+# }
 
 variable "vm_server_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
@@ -231,10 +231,10 @@ variable "vm_availability_domain" {
   default = "ChLp:ME-DUBAI-1-AD-1"
 }
 
-variable "vm_public_instance_name" {
-  type    = string
-  default = "one"
-}
+# variable "vm_public_instance_name" {
+#   type    = string
+#   default = "one"
+# }
 
 variable "vm_image_source_details" {
   type = map(any)
@@ -244,10 +244,10 @@ variable "vm_image_source_details" {
   }
 }
 
-variable "volume_display_name" {
-  type    = string
-  default = "disk-one"
-}
+# variable "volume_display_name" {
+#   type    = string
+#   default = "disk-one"
+# }
 
 variable "volume_attachment_attachment_type" {
   type    = string
@@ -274,17 +274,17 @@ variable "volume_size_in_gbs" {
   default = "40"
 }
 
-variable "volume_attachment_display_name" {
-  type    = string
-  default = "disk-attachment"
-}
+# variable "volume_attachment_display_name" {
+#   type    = string
+#   default = "disk-attachment"
+# }
 
 variable "volume_is_pv_encryption_in_transit_enabled" {
   type    = bool
   default = true
 }
 
-variable "key_name" {
-  type    = string
-  default = "ssh_key"
-}
+# variable "key_name" {
+#   type    = string
+#   default = "ssh_key"
+# }
