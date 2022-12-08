@@ -110,10 +110,12 @@ variable "internet_gateway_display_name" {
 
 # Public subnet parameters
 variable "subnet_public_cidr_block" {
+  type    = string
   default = "10.0.1.0/24"
 }
 
 variable "subnet_public_dns_label" {
+  type    = string
   default = "public"
 }
 
@@ -125,10 +127,12 @@ variable "subnet_public_prohibit_public_ip_on_vnic" {
 
 # Private subnet parameters
 variable "subnet_private_cidr_block" {
+  type    = string
   default = "10.0.201.0/24"
 }
 
 variable "subnet_private_dns_label" {
+  type    = string
   default = "private"
 }
 
@@ -139,13 +143,15 @@ variable "subnet_private_prohibit_public_ip_on_vnic" {
 }
 
 # Internet enabled Route table  parameters
-variable "route_igw_display_name" {
-  default = "igw"
-}
+# variable "route_igw_display_name" {
+#   type    = string
+#   default = "igw"
+# }
 
-variable "route_igw_target_cidr_block" {
-  default = "0.0.0.0/0"
-}
+# variable "route_igw_target_cidr_block" {
+#   type    = string
+#   default = "0.0.0.0/0"
+# }
 
 # Security list parameters
 variable "sec_public_access" {
