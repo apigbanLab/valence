@@ -1,5 +1,8 @@
 resource "oci_core_volume" "k3s-server-01-data" {
   #Required
+  #TODO - PROD - disable checkov rule suppression below
+  #checkov:skip=CKV_OCI_3:The volume doesn't need to be encrypted during testing phase
+  #checkov:skip=CKV_OCI_2:The volume doesn't need to have backup config during testing phase
   compartment_id      = var.provider_compartment_id
   availability_domain = var.vm_availability_domain
   size_in_gbs         = var.volume_size_in_gbs
@@ -16,6 +19,9 @@ resource "oci_core_volume" "k3s-server-01-data" {
 
 resource "oci_core_volume" "k3s-agent-01-data" {
   #Required
+  #TODO - PROD - disable checkov rule suppression below
+  #checkov:skip=CKV_OCI_3:The volume doesn't need to be encrypted during testing phase
+  #checkov:skip=CKV_OCI_2:The volume doesn't need to have backup config during testing phase
   compartment_id      = var.provider_compartment_id
   availability_domain = var.vm_availability_domain
   size_in_gbs         = var.volume_size_in_gbs
@@ -32,6 +38,9 @@ resource "oci_core_volume" "k3s-agent-01-data" {
 
 resource "oci_core_volume" "k3s-agent-02-data" {
   #Required
+  #TODO - PROD - disable checkov rule suppression below
+  #checkov:skip=CKV_OCI_3:The volume doesn't need to be encrypted during testing phase
+  #checkov:skip=CKV_OCI_2:The volume doesn't need to have backup config during testing phase
   compartment_id      = var.provider_compartment_id
   availability_domain = var.vm_availability_domain
   size_in_gbs         = var.volume_size_in_gbs
