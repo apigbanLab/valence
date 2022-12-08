@@ -184,6 +184,12 @@ variable "vm_server_shape" {
   default     = "VM.Standard.A1.Flex"
 }
 
+variable "vm_agent_shape" {
+  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+  type        = string
+  default     = "VM.Standard.A1.Flex"
+}
+
 variable "vm_k3s_server_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)

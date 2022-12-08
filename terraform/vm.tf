@@ -8,7 +8,7 @@ resource "oci_core_instance" "k3s-server-01" {
   is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
-  shape                               = var.vm_shape
+  shape                               = var.vm_server_shape
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -49,11 +49,6 @@ resource "oci_core_instance" "k3s-server-01" {
       name          = "Bastion"
     }
   }
-
-  provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
-  }
-
 }
 
 resource "oci_core_instance" "k3s-agent-01" {
@@ -61,7 +56,7 @@ resource "oci_core_instance" "k3s-agent-01" {
   is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
-  shape                               = var.vm_shape
+  shape                               = var.vm_agent_shape
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -101,10 +96,6 @@ resource "oci_core_instance" "k3s-agent-01" {
       desired_state = "ENABLED"
       name          = "Bastion"
     }
-  }
-
-  provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
   }
 
 }
@@ -114,7 +105,7 @@ resource "oci_core_instance" "k3s-agent-02" {
   is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
-  shape                               = var.vm_shape
+  shape                               = var.vm_agent_shape
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -157,7 +148,7 @@ resource "oci_core_instance" "k3s-agent-02" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > ../server-config/'${oci_core_instance.public.display_name}.privkey'"
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey'"
   }
 
 }
