@@ -1,6 +1,8 @@
 ---
 all:
   children:
-    one:
-      hosts:
-        one:
+    k3s:
+      servers:
+        k3s-server-01:
+      agents:
+        k3s-agent-0[1:2]:
