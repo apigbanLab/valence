@@ -38,3 +38,4 @@ nocommit/*
 vault.yaml
 vaultpass
 *.privkey
+scratch/*
