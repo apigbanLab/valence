@@ -12,27 +12,25 @@ resource "oci_core_instance" "k3s-server-01" {
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
-
+  launch_options {
+    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+  }
   shape_config {
     memory_in_gbs = var.vm_k3s_server_shape_config.memory_in_gbs
     ocpus         = var.vm_k3s_server_shape_config.ocpus
   }
-
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.public_subnet.id
   }
-
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
   }
-
   source_details {
     source_id   = var.vm_image_source_details.source_id
     source_type = var.vm_image_source_details.source_type
   }
-
   agent_config {
     is_management_disabled = "false"
     is_monitoring_disabled = "false"
@@ -49,7 +47,6 @@ resource "oci_core_instance" "k3s-server-01" {
       name          = "Bastion"
     }
   }
-
   instance_options {
     are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
   }
@@ -64,27 +61,25 @@ resource "oci_core_instance" "k3s-agent-01" {
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
-
+  launch_options {
+    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+  }
   shape_config {
     memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs
     ocpus         = var.vm_k3s_agent_shape_config.ocpus
   }
-
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.public_subnet.id
   }
-
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
   }
-
   source_details {
     source_id   = var.vm_image_source_details.source_id
     source_type = var.vm_image_source_details.source_type
   }
-
   agent_config {
     is_management_disabled = "false"
     is_monitoring_disabled = "false"
@@ -101,7 +96,6 @@ resource "oci_core_instance" "k3s-agent-01" {
       name          = "Bastion"
     }
   }
-
   instance_options {
     are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
   }
@@ -116,27 +110,25 @@ resource "oci_core_instance" "k3s-agent-02" {
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
-
+  launch_options {
+    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+  }
   shape_config {
     memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs
     ocpus         = var.vm_k3s_agent_shape_config.ocpus
   }
-
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.public_subnet.id
   }
-
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
   }
-
   source_details {
     source_id   = var.vm_image_source_details.source_id
     source_type = var.vm_image_source_details.source_type
   }
-
   agent_config {
     is_management_disabled = "false"
     is_monitoring_disabled = "false"
@@ -153,13 +145,10 @@ resource "oci_core_instance" "k3s-agent-02" {
       name          = "Bastion"
     }
   }
-
   instance_options {
     are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
   }
-
   provisioner "local-exec" {
     command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey'"
   }
-
 }
