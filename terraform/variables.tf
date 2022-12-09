@@ -277,7 +277,7 @@ variable "volume_vpus_per_gb" {
 
 variable "volume_size_in_gbs" {
   type    = string
-  default = "40"
+  default = "50"
 }
 
 # variable "volume_attachment_display_name" {
