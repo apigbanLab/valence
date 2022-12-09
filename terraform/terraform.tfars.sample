@@ -1,0 +1,31 @@
+provider_api_fingerprint      = ""
+provider_api_private_key_path = ""
+provider_region               = ""
+provider_tenancy_id           = ""
+provider_user_id              = ""
+provider_compartment_id       = ""
+provider_label_prefix         = ""
+
+vcn_name                     = ""
+vcn_create_internet_gateway  = true
+vcn_create_nat_gateway       = false
+vcn_create_service_gateway   = false
+vcn_enable_ipv6              = false
+vcn_cidrs                    = [""]
+vcn_dns_label                = ""
+vcn_lockdown_default_seclist = false
+vcn_freeform_tags = {
+  environment = "dev"
+  owner       = "apigban"
+}
+vcn_defined_tags = {
+"Oracle-Tags.CreatedBy" = "terraform" }
+
+# gateways parameters
+vcn_internet_gateway_display_name = "igw"
+vcn_nat_gateway_display_name      = "ngw"
+vcn_service_gateway_display_name  = "sgw"
+vcn_attached_drg_id               = null
+
+# vm instance parameters
+vm_ssh_authorized_keys = ""
