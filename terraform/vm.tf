@@ -13,7 +13,8 @@ resource "oci_core_instance" "k3s-server-01" {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
   launch_options {
-    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+    is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
+    network_type                        = var.vm_launch_options.network_type
   }
   shape_config {
     memory_in_gbs = var.vm_k3s_server_shape_config.memory_in_gbs
@@ -62,7 +63,8 @@ resource "oci_core_instance" "k3s-agent-01" {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
   launch_options {
-    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+    is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
+    network_type                        = var.vm_launch_options.network_type
   }
   shape_config {
     memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs
@@ -111,7 +113,8 @@ resource "oci_core_instance" "k3s-agent-02" {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
   launch_options {
-    is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
+    is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
+    network_type                        = var.vm_launch_options.network_type
   }
   shape_config {
     memory_in_gbs = var.vm_k3s_agent_shape_config.memory_in_gbs

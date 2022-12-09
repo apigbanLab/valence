@@ -250,6 +250,13 @@ variable "vm_image_source_details" {
   }
 }
 
+variable "vm_launch_options" {
+  type = map(any)
+  default = {
+    is_pv_encryption_in_transit_enabled = true
+    network_type                        = "PARAVIRTUALIZED"
+  }
+}
 # variable "volume_display_name" {
 #   type    = string
 #   default = "disk-one"
