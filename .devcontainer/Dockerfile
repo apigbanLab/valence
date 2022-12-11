@@ -95,7 +95,7 @@ USER vscode
 RUN pip3 install --progress-bar off --upgrade --user pre-commit
 
 # Install checkov
-RUN pip3 install --progress-bar off --upgrade --user checkov
+RUN pip3 install --progress-bar off checkov
 
 # Initialize TFLINT rules set
 # RUN tflint --init

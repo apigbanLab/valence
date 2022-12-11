@@ -1,6 +1,0 @@
----
-all:
-  children:
-    one:
-      hosts:
-        one:
