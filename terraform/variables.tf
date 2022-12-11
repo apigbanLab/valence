@@ -187,10 +187,16 @@ variable "sec_wireguard_access" {
 variable "vm_server_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
-  default     = "VM.Standard.A1.Flex"
+  default     = "VM.Standard.E2.1.Micro"
 }
 
 variable "vm_agent_shape" {
+  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+  type        = string
+  default     = "VM.Standard.A1.Flex"
+}
+
+variable "vm_db_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
   default     = "VM.Standard.A1.Flex"
@@ -200,12 +206,21 @@ variable "vm_k3s_server_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
-    memory_in_gbs = "6"
+    memory_in_gbs = "1"
     ocpus         = "1"
   }
 }
 
 variable "vm_k3s_agent_shape_config" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "6"
+    ocpus         = "1"
+  }
+}
+
+variable "vm_k3s_db_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
