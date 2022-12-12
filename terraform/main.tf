@@ -20,28 +20,28 @@ module "vcn" {
 
 resource "oci_core_subnet" "public_subnet" {
   #Required
-  cidr_block     = var.subnet_public_cidr_block
+  cidr_block     = var.subnet_k3s-agent_cidr_block
   compartment_id = var.provider_compartment_id
   vcn_id         = module.vcn.vcn_id
 
   #Optional
-  display_name               = var.subnet_public_dns_label
-  dns_label                  = var.subnet_public_dns_label
-  prohibit_public_ip_on_vnic = var.subnet_public_prohibit_public_ip_on_vnic
+  display_name               = var.subnet_k3s-agent_dns_label
+  dns_label                  = var.subnet_k3s-agent_dns_label
+  prohibit_public_ip_on_vnic = var.subnet_k3s-agent_prohibit_public_ip_on_vnic
   route_table_id             = module.vcn.ig_route_id
   security_list_ids          = [oci_core_security_list.public.id]
 }
 
 resource "oci_core_subnet" "private_subnet" {
   #Required
-  cidr_block     = var.subnet_private_cidr_block
+  cidr_block     = var.subnet_k3s-server_cidr_block
   compartment_id = var.provider_compartment_id
   vcn_id         = module.vcn.vcn_id
 
   #Optional
-  display_name               = var.subnet_private_dns_label
-  dns_label                  = var.subnet_private_dns_label
-  prohibit_public_ip_on_vnic = var.subnet_private_prohibit_public_ip_on_vnic
+  display_name               = var.subnet_k3s-server_dns_label
+  dns_label                  = var.subnet_k3s-server_dns_label
+  prohibit_public_ip_on_vnic = var.subnet_k3s-server_prohibit_public_ip_on_vnic
   route_table_id             = module.vcn.ig_route_id
   # security_list_ids = oci_core_vcn.oracle_one.security_list_ids
 }

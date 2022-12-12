@@ -108,35 +108,52 @@ variable "internet_gateway_display_name" {
 #   default     = "sgw"
 # }
 
-# Public subnet parameters
-variable "subnet_public_cidr_block" {
+# k3s-agent subnet parameters
+variable "subnet_k3s-agent_cidr_block" {
   type    = string
   default = "10.0.1.0/24"
 }
 
-variable "subnet_public_dns_label" {
+variable "subnet_k3s-agent_dns_label" {
   type    = string
-  default = "public"
+  default = "k3s-agent"
 }
 
-variable "subnet_public_prohibit_public_ip_on_vnic" {
+variable "subnet_k3s-agent_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a public subnet will be provided a public IP"
   default     = false
 }
 
-# Private subnet parameters
-variable "subnet_private_cidr_block" {
+# k3s-server subnet parameters
+variable "subnet_k3s-server_cidr_block" {
   type    = string
   default = "10.0.201.0/24"
 }
 
-variable "subnet_private_dns_label" {
+variable "subnet_k3s-server_dns_label" {
   type    = string
   default = "private"
 }
 
-variable "subnet_private_prohibit_public_ip_on_vnic" {
+variable "subnet_k3s-server_prohibit_public_ip_on_vnic" {
+  type        = bool
+  description = "VNICs created in a private subnet will not be provided a public IP"
+  default     = true
+}
+
+# k3s-db subnet parameters
+variable "subnet_k3s-db_cidr_block" {
+  type    = string
+  default = "10.0.201.0/24"
+}
+
+variable "subnet_k3s-db_dns_label" {
+  type    = string
+  default = "private"
+}
+
+variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a private subnet will not be provided a public IP"
   default     = true
@@ -160,9 +177,27 @@ variable "sec_public_access" {
   type        = list(any)
 }
 
-variable "sec_wireguard_access" {
+variable "sec_wireguard_flannel_vxlan_access" {
   description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["anywhere"]
+  default     = ["10.0.1.0/24","10.0.201.0/24"]
+  type        = list(any)
+}
+
+variable "sec_wireguard_flannel_ipv4_access" {
+  description = "A list of CIDR blocks to which access to wireguard_flannel access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
+  default     = ["10.0.1.0/24","10.0.201.0/24"]
+  type        = list(any)
+}
+
+variable "sec_kube_metrics_access" {
+  description = "A list of CIDR blocks to which access to kube_metrics access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
+  default     = ["10.0.1.0/24","10.0.201.0/24"]
+  type        = list(any)
+}
+
+variable "sec_k3s_apiserver_access" {
+  description = "A list of CIDR blocks to which access to k3s access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
+  default     = ["10.0.201.0/24"]
   type        = list(any)
 }
 
