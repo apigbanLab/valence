@@ -94,15 +94,17 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_pos
 
 # Rules related to k3s-agent-subnet-nsg
 # EGRESS
-resource "oci_core_network_security_group" "k3s-agent_nsg" {
-  compartment_id = var.provider_compartment_id
-  display_name   = "k3s-agent-subnet-nsg"
-  vcn_id         = module.vcn.vcn_id
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" {
+  network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
+  direction                 = "EGRESS"
+  protocol                  = "6"
+  destination               = "0.0.0.0/0"
+  destination_type          = "CIDR_BLOCK"
 }
 
 # INGRESS
-resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress" {
-  network_security_group_id = oci_core_network_security_group.ATPSecurityGroup.id
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+  network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = oci_core_network_security_group.k3s-server_nsg.id
