@@ -10,6 +10,20 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Egress"
 }
 
 # INGRESS
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_tcpAll" {
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = var.workstation_publicIPAddress
+  source_type               = "CIDR"
+  tcp_options {
+    destination_port_range {
+      max = 1
+      min = 65535
+    }
+  }
+}
+
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver" {
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
@@ -78,6 +92,20 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Egress" {
 
 
 # INGRESS
+resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcpAll" {
+  network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = var.workstation_publicIPAddress
+  source_type               = "CIDR"
+  tcp_options {
+    destination_port_range {
+      max = 1
+      min = 65535
+    }
+  }
+}
+
 resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
@@ -103,6 +131,21 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" 
 }
 
 # INGRESS
+
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_tcpAll" {
+  network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = var.workstation_publicIPAddress
+  source_type               = "CIDR"
+  tcp_options {
+    destination_port_range {
+      max = 1
+      min = 65535
+    }
+  }
+}
+
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
