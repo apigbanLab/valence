@@ -18,7 +18,7 @@ module "vcn" {
 }
 
 
-resource "oci_core_subnet" "public_subnet" {
+resource "oci_core_subnet" "subnet_k3s-agent" {
   #Required
   cidr_block     = var.subnet_k3s-agent_cidr_block
   compartment_id = var.provider_compartment_id
@@ -29,10 +29,9 @@ resource "oci_core_subnet" "public_subnet" {
   dns_label                  = var.subnet_k3s-agent_dns_label
   prohibit_public_ip_on_vnic = var.subnet_k3s-agent_prohibit_public_ip_on_vnic
   route_table_id             = module.vcn.ig_route_id
-  security_list_ids          = [oci_core_security_list.public.id]
 }
 
-resource "oci_core_subnet" "private_subnet" {
+resource "oci_core_subnet" "subnet_k3s-server" {
   #Required
   cidr_block     = var.subnet_k3s-server_cidr_block
   compartment_id = var.provider_compartment_id
@@ -43,7 +42,19 @@ resource "oci_core_subnet" "private_subnet" {
   dns_label                  = var.subnet_k3s-server_dns_label
   prohibit_public_ip_on_vnic = var.subnet_k3s-server_prohibit_public_ip_on_vnic
   route_table_id             = module.vcn.ig_route_id
-  # security_list_ids = oci_core_vcn.oracle_one.security_list_ids
+}
+
+resource "oci_core_subnet" "subnet_k3s-db" {
+  #Required
+  cidr_block     = var.subnet_k3s-db_cidr_block
+  compartment_id = var.provider_compartment_id
+  vcn_id         = module.vcn.vcn_id
+
+  #Optional
+  display_name               = var.subnet_k3s-db_dns_label
+  dns_label                  = var.subnet_k3s-db_dns_label
+  prohibit_public_ip_on_vnic = var.subnet_k3s-db_prohibit_public_ip_on_vnic
+  route_table_id             = module.vcn.ig_route_id
 }
 
 resource "oci_core_internet_gateway" "igw" {
@@ -56,9 +67,7 @@ resource "oci_core_internet_gateway" "igw" {
 }
 
 resource "oci_core_default_route_table" "this" {
-
-  manage_default_resource_id = oci_core_subnet.public_subnet.route_table_id
-
+  manage_default_resource_id = oci_core_subnet.subnet_k3s-agent.route_table_id
   route_rules {
     #Required
     network_entity_id = oci_core_internet_gateway.igw.id
