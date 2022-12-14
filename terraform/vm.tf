@@ -24,6 +24,7 @@ resource "oci_core_instance" "k3s-server-01" {
     assign_private_dns_record = "true"
     assign_public_ip          = "false"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
+    nsg_ids                   = ["oci_core_network_security_group.k3s-server_nsg.id"]
   }
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
@@ -74,6 +75,7 @@ resource "oci_core_instance" "k3s-server-02" {
     assign_private_dns_record = "true"
     assign_public_ip          = "false"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
+    nsg_ids                   = ["oci_core_network_security_group.k3s-server_nsg.id"]
   }
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
@@ -124,6 +126,7 @@ resource "oci_core_instance" "k3s-agent-01" {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-agent.id
+    nsg_ids                   = [oci_core_network_security_group.k3s-agent_nsg.id]
   }
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
@@ -174,6 +177,7 @@ resource "oci_core_instance" "k3s-agent-02" {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-agent.id
+    nsg_ids                   = [oci_core_network_security_group.k3s-agent_nsg.id]
   }
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
@@ -227,6 +231,7 @@ resource "oci_core_instance" "k3s-db-01" {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-db.id
+    nsg_ids                   = [oci_core_network_security_group.k3s-db_nsg.id]
   }
   availability_config {
     recovery_action = var.vm_availability_config.recovery_action
