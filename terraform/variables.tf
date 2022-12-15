@@ -286,35 +286,35 @@ variable "volume_attachment_attachment_type" {
   default = "paravirtualized"
 }
 
-variable "volume_autotune_policies_autotune_type" {
-  type    = string
-  default = "PERFORMANCE_BASED"
-}
+# variable "volume_autotune_policies_autotune_type" {
+#   type    = string
+#   default = "PERFORMANCE_BASED"
+# }
 
-variable "volume_autotune_policies_max_vpus_per_gb" {
-  type    = string
-  default = "20"
-}
+# variable "volume_autotune_policies_max_vpus_per_gb" {
+#   type    = string
+#   default = "20"
+# }
 
-variable "volume_vpus_per_gb" {
-  type    = string
-  default = "10"
-}
+# variable "volume_vpus_per_gb" {
+#   type    = string
+#   default = "10"
+# }
 
-variable "volume_size_in_gbs" {
-  type    = string
-  default = "50"
-}
+# variable "volume_size_in_gbs" {
+#   type    = string
+#   default = "50"
+# }
 
 # variable "volume_attachment_display_name" {
 #   type    = string
 #   default = "disk-attachment"
 # }
 
-variable "volume_is_pv_encryption_in_transit_enabled" {
-  type    = bool
-  default = true
-}
+# variable "volume_is_pv_encryption_in_transit_enabled" {
+#   type    = bool
+#   default = true
+# }
 
 # variable "key_name" {
 #   type    = string
