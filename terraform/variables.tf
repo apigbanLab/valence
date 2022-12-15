@@ -281,10 +281,10 @@ variable "vm_launch_options" {
 #   default = "disk-one"
 # }
 
-variable "volume_attachment_attachment_type" {
-  type    = string
-  default = "paravirtualized"
-}
+# variable "volume_attachment_attachment_type" {
+#   type    = string
+#   default = "paravirtualized"
+# }
 
 # variable "volume_autotune_policies_autotune_type" {
 #   type    = string
