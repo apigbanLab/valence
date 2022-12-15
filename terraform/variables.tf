@@ -170,37 +170,6 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 #   default = "0.0.0.0/0"
 # }
 
-# Security list parameters
-variable "sec_public_access" {
-  description = "A list of CIDR blocks to which access to public access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["anywhere"]
-  type        = list(any)
-}
-
-variable "sec_wireguard_flannel_vxlan_access" {
-  description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["10.0.1.0/24","10.0.201.0/24"]
-  type        = list(any)
-}
-
-variable "sec_wireguard_flannel_ipv4_access" {
-  description = "A list of CIDR blocks to which access to wireguard_flannel access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
-  default     = ["10.0.1.0/24","10.0.201.0/24"]
-  type        = list(any)
-}
-
-variable "sec_kube_metrics_access" {
-  description = "A list of CIDR blocks to which access to kube_metrics access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
-  default     = ["10.0.1.0/24","10.0.201.0/24"]
-  type        = list(any)
-}
-
-variable "sec_k3s_apiserver_access" {
-  description = "A list of CIDR blocks to which access to k3s access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows access from anywhere."
-  default     = ["10.0.201.0/24"]
-  type        = list(any)
-}
-
 # variable "sec_icmp_access" {
 #   description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
 #   default     = ["anywhere"]
@@ -351,3 +320,8 @@ variable "volume_is_pv_encryption_in_transit_enabled" {
 #   type    = string
 #   default = "ssh_key"
 # }
+
+variable "workstation_publicIPAddress" {
+  description = "The current Public IP address where terraform apply is going to be executed"
+  type        = string
+}
