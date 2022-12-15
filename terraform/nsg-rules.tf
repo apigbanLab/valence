@@ -2,6 +2,7 @@
 # Rules related to k3s-server-subnet-nsg
 # EGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Egress" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "EGRESS"
   protocol                  = "6"
@@ -11,6 +12,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Egress"
 
 # INGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_tcpAll" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -25,6 +27,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -39,6 +42,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_metricsServer" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -53,6 +57,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_wireguardFlannel" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -67,6 +72,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_wireguardVxlan" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -83,6 +89,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
 # Rules related to k3s-db-subnet-nsg
 # EGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Egress" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "EGRESS"
   protocol                  = "6"
@@ -93,6 +100,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Egress" {
 
 # INGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcpAll" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -107,6 +115,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -123,6 +132,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_pos
 # Rules related to k3s-agent-subnet-nsg
 # EGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "EGRESS"
   protocol                  = "6"
@@ -133,6 +143,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" 
 # INGRESS
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_tcpAll" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -147,6 +158,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -161,6 +173,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_metricsServer" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -175,6 +188,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_nodePortServices" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -189,6 +203,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_wireguardVxlan" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
@@ -203,6 +218,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
 }
 
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_wireguardFlannel" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
