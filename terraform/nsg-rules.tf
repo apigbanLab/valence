@@ -17,7 +17,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = var.workstation_publicIPAddress
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 1
@@ -47,7 +47,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 10250
@@ -62,7 +62,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 51820
@@ -77,7 +77,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 8472
@@ -105,7 +105,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = var.workstation_publicIPAddress
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 1
@@ -148,7 +148,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = var.workstation_publicIPAddress
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 1
@@ -178,7 +178,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 10250
@@ -193,7 +193,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 30000
@@ -208,7 +208,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 8472
@@ -223,7 +223,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = "10.0.0.0/8"
-  source_type               = "CIDR"
+  source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
       max = 51820
