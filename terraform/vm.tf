@@ -9,7 +9,7 @@ resource "oci_core_instance" "k3s-server-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_server_shape
-  fault_domain = "FAULT-DOMAIN-1"
+  fault_domain                        = "FAULT-DOMAIN-1"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -61,7 +61,7 @@ resource "oci_core_instance" "k3s-server-02" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_server_shape
-  fault_domain = "FAULT-DOMAIN-2"
+  fault_domain                        = "FAULT-DOMAIN-2"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -113,7 +113,7 @@ resource "oci_core_instance" "k3s-agent-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_agent_shape
-  fault_domain = "FAULT-DOMAIN-1"
+  fault_domain                        = "FAULT-DOMAIN-1"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -165,7 +165,7 @@ resource "oci_core_instance" "k3s-agent-02" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_agent_shape
-  fault_domain = "FAULT-DOMAIN-2"
+  fault_domain                        = "FAULT-DOMAIN-2"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -217,7 +217,7 @@ resource "oci_core_instance" "k3s-db-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_db_shape
-  fault_domain = "FAULT-DOMAIN-3"
+  fault_domain                        = "FAULT-DOMAIN-3"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
