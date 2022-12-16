@@ -20,8 +20,8 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
-      max = 1
-      min = 65535
+      max = 65535
+      min = 1
     }
   }
 }
@@ -108,8 +108,8 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
-      max = 1
-      min = 65535
+      max = 65535
+      min = 1
     }
   }
 }
@@ -151,8 +151,8 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
-      max = 1
-      min = 65535
+      max = 65535
+      min = 1
     }
   }
 }
@@ -196,8 +196,8 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
-      max = 30000
-      min = 32767
+      max = 32767
+      min = 30000
     }
   }
 }
