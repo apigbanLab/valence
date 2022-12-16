@@ -23,7 +23,7 @@ resource "oci_core_instance" "k3s-server-01" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
     nsg_ids                   = [oci_core_network_security_group.k3s-server_nsg.id]
   }
@@ -75,7 +75,7 @@ resource "oci_core_instance" "k3s-server-02" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
     nsg_ids                   = [oci_core_network_security_group.k3s-server_nsg.id]
   }
@@ -231,7 +231,7 @@ resource "oci_core_instance" "k3s-db-01" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-db.id
     nsg_ids                   = [oci_core_network_security_group.k3s-db_nsg.id]
   }
