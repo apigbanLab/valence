@@ -262,6 +262,6 @@ resource "oci_core_instance" "k3s-db-01" {
     are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
   }
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey'"
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey"
   }
 }
