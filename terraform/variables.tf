@@ -116,7 +116,7 @@ variable "subnet_k3s-agent_cidr_block" {
 
 variable "subnet_k3s-agent_dns_label" {
   type    = string
-  default = "k3s-agent"
+  default = "k3sagent"
 }
 
 variable "subnet_k3s-agent_prohibit_public_ip_on_vnic" {
@@ -133,7 +133,7 @@ variable "subnet_k3s-server_cidr_block" {
 
 variable "subnet_k3s-server_dns_label" {
   type    = string
-  default = "private"
+  default = "k3sserver"
 }
 
 variable "subnet_k3s-server_prohibit_public_ip_on_vnic" {
@@ -145,12 +145,12 @@ variable "subnet_k3s-server_prohibit_public_ip_on_vnic" {
 # k3s-db subnet parameters
 variable "subnet_k3s-db_cidr_block" {
   type    = string
-  default = "10.0.201.0/24"
+  default = "10.0.101.0/24"
 }
 
 variable "subnet_k3s-db_dns_label" {
   type    = string
-  default = "private"
+  default = "k3sdb"
 }
 
 variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
@@ -281,40 +281,40 @@ variable "vm_launch_options" {
 #   default = "disk-one"
 # }
 
-# variable "volume_attachment_attachment_type" {
-#   type    = string
-#   default = "paravirtualized"
-# }
+variable "volume_attachment_attachment_type" {
+  type    = string
+  default = "paravirtualized"
+}
 
-# variable "volume_autotune_policies_autotune_type" {
-#   type    = string
-#   default = "PERFORMANCE_BASED"
-# }
+variable "volume_autotune_policies_autotune_type" {
+  type    = string
+  default = "PERFORMANCE_BASED"
+}
 
-# variable "volume_autotune_policies_max_vpus_per_gb" {
-#   type    = string
-#   default = "20"
-# }
+variable "volume_autotune_policies_max_vpus_per_gb" {
+  type    = string
+  default = "20"
+}
 
-# variable "volume_vpus_per_gb" {
-#   type    = string
-#   default = "10"
-# }
+variable "volume_vpus_per_gb" {
+  type    = string
+  default = "10"
+}
 
-# variable "volume_size_in_gbs" {
-#   type    = string
-#   default = "50"
-# }
+variable "volume_size_in_gbs" {
+  type    = string
+  default = "50"
+}
 
 # variable "volume_attachment_display_name" {
 #   type    = string
 #   default = "disk-attachment"
 # }
 
-# variable "volume_is_pv_encryption_in_transit_enabled" {
-#   type    = bool
-#   default = true
-# }
+variable "volume_is_pv_encryption_in_transit_enabled" {
+  type    = bool
+  default = true
+}
 
 # variable "key_name" {
 #   type    = string
