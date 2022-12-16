@@ -261,13 +261,22 @@ variable "vm_availability_domain" {
 #   default = "one"
 # }
 
-variable "vm_image_source_details" {
+variable "vm_x86_image_source_details" {
+  type = map(any)
+  default = {
+    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+    source_type = "image"
+  }
+}
+
+variable "vm_aarch64_image_source_details" {
   type = map(any)
   default = {
     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
     source_type = "image"
   }
 }
+
 
 variable "vm_launch_options" {
   type = map(any)
