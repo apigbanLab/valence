@@ -139,7 +139,7 @@ variable "subnet_k3s-server_dns_label" {
 variable "subnet_k3s-server_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a private subnet will not be provided a public IP"
-  default     = true
+  default     = false
 }
 
 # k3s-db subnet parameters
@@ -156,7 +156,7 @@ variable "subnet_k3s-db_dns_label" {
 variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a private subnet will not be provided a public IP"
-  default     = true
+  default     = false
 }
 
 # Internet enabled Route table  parameters

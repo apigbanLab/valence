@@ -9,7 +9,7 @@ resource "oci_core_instance" "k3s-server-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_server_shape
-  fault_domain = "FAULT-DOMAIN-1"
+  fault_domain                        = "FAULT-DOMAIN-1"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -23,7 +23,7 @@ resource "oci_core_instance" "k3s-server-01" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
     nsg_ids                   = [oci_core_network_security_group.k3s-server_nsg.id]
   }
@@ -61,7 +61,7 @@ resource "oci_core_instance" "k3s-server-02" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_server_shape
-  fault_domain = "FAULT-DOMAIN-2"
+  fault_domain                        = "FAULT-DOMAIN-2"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -75,7 +75,7 @@ resource "oci_core_instance" "k3s-server-02" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-server.id
     nsg_ids                   = [oci_core_network_security_group.k3s-server_nsg.id]
   }
@@ -113,7 +113,7 @@ resource "oci_core_instance" "k3s-agent-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_agent_shape
-  fault_domain = "FAULT-DOMAIN-1"
+  fault_domain                        = "FAULT-DOMAIN-1"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -165,7 +165,7 @@ resource "oci_core_instance" "k3s-agent-02" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_agent_shape
-  fault_domain = "FAULT-DOMAIN-2"
+  fault_domain                        = "FAULT-DOMAIN-2"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -217,7 +217,7 @@ resource "oci_core_instance" "k3s-db-01" {
   availability_domain                 = var.vm_availability_domain
   compartment_id                      = var.provider_compartment_id
   shape                               = var.vm_db_shape
-  fault_domain = "FAULT-DOMAIN-3"
+  fault_domain                        = "FAULT-DOMAIN-3"
   metadata = {
     "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
@@ -231,7 +231,7 @@ resource "oci_core_instance" "k3s-db-01" {
   }
   create_vnic_details {
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     subnet_id                 = oci_core_subnet.subnet_k3s-db.id
     nsg_ids                   = [oci_core_network_security_group.k3s-db_nsg.id]
   }
