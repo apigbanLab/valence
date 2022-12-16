@@ -108,35 +108,52 @@ variable "internet_gateway_display_name" {
 #   default     = "sgw"
 # }
 
-# Public subnet parameters
-variable "subnet_public_cidr_block" {
+# k3s-agent subnet parameters
+variable "subnet_k3s-agent_cidr_block" {
   type    = string
   default = "10.0.1.0/24"
 }
 
-variable "subnet_public_dns_label" {
+variable "subnet_k3s-agent_dns_label" {
   type    = string
-  default = "public"
+  default = "k3sagent"
 }
 
-variable "subnet_public_prohibit_public_ip_on_vnic" {
+variable "subnet_k3s-agent_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a public subnet will be provided a public IP"
   default     = false
 }
 
-# Private subnet parameters
-variable "subnet_private_cidr_block" {
+# k3s-server subnet parameters
+variable "subnet_k3s-server_cidr_block" {
   type    = string
   default = "10.0.201.0/24"
 }
 
-variable "subnet_private_dns_label" {
+variable "subnet_k3s-server_dns_label" {
   type    = string
-  default = "private"
+  default = "k3sserver"
 }
 
-variable "subnet_private_prohibit_public_ip_on_vnic" {
+variable "subnet_k3s-server_prohibit_public_ip_on_vnic" {
+  type        = bool
+  description = "VNICs created in a private subnet will not be provided a public IP"
+  default     = true
+}
+
+# k3s-db subnet parameters
+variable "subnet_k3s-db_cidr_block" {
+  type    = string
+  default = "10.0.101.0/24"
+}
+
+variable "subnet_k3s-db_dns_label" {
+  type    = string
+  default = "k3sdb"
+}
+
+variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
   type        = bool
   description = "VNICs created in a private subnet will not be provided a public IP"
   default     = true
@@ -152,19 +169,6 @@ variable "subnet_private_prohibit_public_ip_on_vnic" {
 #   type    = string
 #   default = "0.0.0.0/0"
 # }
-
-# Security list parameters
-variable "sec_public_access" {
-  description = "A list of CIDR blocks to which access to public access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["anywhere"]
-  type        = list(any)
-}
-
-variable "sec_wireguard_access" {
-  description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-  default     = ["anywhere"]
-  type        = list(any)
-}
 
 # variable "sec_icmp_access" {
 #   description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
@@ -187,10 +191,16 @@ variable "sec_wireguard_access" {
 variable "vm_server_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
-  default     = "VM.Standard.A1.Flex"
+  default     = "VM.Standard.E2.1.Micro"
 }
 
 variable "vm_agent_shape" {
+  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+  type        = string
+  default     = "VM.Standard.A1.Flex"
+}
+
+variable "vm_db_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
   default     = "VM.Standard.A1.Flex"
@@ -200,12 +210,21 @@ variable "vm_k3s_server_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
-    memory_in_gbs = "6"
+    memory_in_gbs = "1"
     ocpus         = "1"
   }
 }
 
 variable "vm_k3s_agent_shape_config" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "6"
+    ocpus         = "1"
+  }
+}
+
+variable "vm_k3s_db_shape_config" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
@@ -242,13 +261,22 @@ variable "vm_availability_domain" {
 #   default = "one"
 # }
 
-variable "vm_image_source_details" {
+variable "vm_x86_image_source_details" {
+  type = map(any)
+  default = {
+    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+    source_type = "image"
+  }
+}
+
+variable "vm_aarch64_image_source_details" {
   type = map(any)
   default = {
     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
     source_type = "image"
   }
 }
+
 
 variable "vm_launch_options" {
   type = map(any)
@@ -301,3 +329,8 @@ variable "volume_is_pv_encryption_in_transit_enabled" {
 #   type    = string
 #   default = "ssh_key"
 # }
+
+variable "workstation_publicIPAddress" {
+  description = "The current Public IP address where terraform apply is going to be executed"
+  type        = string
+}
