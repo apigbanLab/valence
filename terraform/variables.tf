@@ -188,6 +188,37 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 #   type        = number
 # }
 
+# K3s Server - Internal LB - Parameters
+variable "k3sserver-ILB_display_name" {
+  type    = string
+  default = "k3sserver-lb"
+}
+
+
+variable "k3sserver-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
+
+variable "k3sserver-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
+
+variable "k3sserver-ILB_is_private" {
+  type    = bool
+  default = true
+}
+
+variable "k3sserver-ILB_shaped_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 50
+    minimum_bandwidth_in_mbps = 10
+  }
+}
+
 variable "vm_server_shape" {
   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
   type        = string
