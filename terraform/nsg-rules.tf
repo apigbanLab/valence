@@ -16,7 +16,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -104,7 +104,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -147,7 +147,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
