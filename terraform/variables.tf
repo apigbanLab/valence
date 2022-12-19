@@ -222,12 +222,12 @@ variable "k3sserver-ILB_shaped_details" {
 # K3s Server Instance Configuration parameters
 
 variable "IC_display_name-k3sserver" {
-  type = string
+  type    = string
   default = "k3s server"
 }
 
 variable "IC_ID_instance_type" {
-  type        = string
+  type    = string
   default = "compute"
 }
 
@@ -237,16 +237,10 @@ variable "IC_ID_LD_availability_domain" {
 }
 
 variable "IC_ID_LD_create_vnic_details" {
+  type = map(any)
+  default = {
     assign_private_dns_record = "true"
     assign_public_ip          = "true"
-    subnet_id                 = oci_core_subnet.subnet_k3s-server.id
-    nsg_ids                   = [oci_core_network_security_group.k3s-server_nsg.id]  
-}
-
-variable "IC_ID_LD_metadata" {
-  type = map(string)
-  default = {
-    "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
   }
 }
 
@@ -267,15 +261,15 @@ variable "IC_ID_LD_shape_config-k3sserver" {
 variable "IC_ID_LD_source_details-k3sserver" {
   type = map(any)
   default = {
-    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
-    source_type = "image"
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+    source_type             = "image"
     boot_volume_size_in_gbs = 50
     boot_volume_vpus_per_gb = 10
-    }
+  }
 }
 
 variable "IC_source-k3sserver" {
-  type = string
+  type    = string
   default = "NONE"
 }
 
