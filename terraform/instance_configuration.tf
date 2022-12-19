@@ -52,8 +52,8 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
       }
       shape                        = var.IC_ID_LD_shape-k3sserver
       shape_config {
-        memory_in_gbs = var.instance_configuration_instance_details_launch_details_shape_config_memory_in_gbs
-        ocpus         = var.instance_configuration_instance_details_launch_details_shape_config_ocpus
+        memory_in_gbs = var.IC_ID_LD_shape_config-k3sserver.memory_in_gbs
+        ocpus         = var.IC_ID_LD_shape_config-k3sserver.ocpus
       }
       source_details = var.IC_ID_LD_source_details-k3sserver
     }
