@@ -7,14 +7,14 @@ resource "random_string" "resource_code" {
 resource "oci_core_instance_configuration" "IC-k3sserver" {
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
-  display_name   = "${var.IC_display_name-k3sserver}-${resource_code}"
+  display_name   = "${var.IC_display_name-k3sserver}-${random_string.resource_code}"
   instance_details {
     instance_type = var.IC_ID_instance_type
     block_volumes {
       attach_details {
         type                                = var.instance_configuration_instance_details_block_volumes_attach_details_type
         device                              = var.instance_configuration_instance_details_block_volumes_attach_details_device
-        display_name                        = "${var.IC_display_name-k3sserver}-${resource_code}-datadisk${format("%0000d", count.index + 1)}"
+        display_name                        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%0000d", count.index + 1)}"
         is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
       }
       create_details {
@@ -24,7 +24,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
         }
         availability_domain = var.IC_ID_LD_availability_domain
         compartment_id      = var.provider_compartment_id
-        display_name        = "${var.IC_display_name-k3sserver}-${resource_code}-datadisk${format("%0000d", count.index + 1)}"
+        display_name        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%0000d", count.index + 1)}"
         size_in_gbs         = var.volume_size_in_gbs
         vpus_per_gb         = var.volume_vpus_per_gb
       }
