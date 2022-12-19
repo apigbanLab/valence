@@ -17,8 +17,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
     instance_type = var.IC_ID_instance_type
     block_volumes {
       attach_details {
-        type                                = var.instance_configuration_instance_details_block_volumes_attach_details_type
-        device                              = var.instance_configuration_instance_details_block_volumes_attach_details_device
+        type                                = var.volume_attachment_attachment_type
         display_name                        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%0000d", count.index + 1)}"
         is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
       }
