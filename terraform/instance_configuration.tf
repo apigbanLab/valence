@@ -4,6 +4,11 @@ resource "random_string" "resource_code" {
   upper   = false
 }
 
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "oci_core_instance_configuration" "IC-k3sserver" {
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
