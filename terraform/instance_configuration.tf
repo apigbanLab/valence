@@ -10,16 +10,15 @@ resource "tls_private_key" "ssh_key" {
 }
 
 resource "oci_core_instance_configuration" "IC-k3sserver" {
-  count          = 000
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
-  display_name   = "${var.IC_display_name-k3sserver}-${random_string.resource_code}"
+  display_name   = "${var.IC_display_name-k3sserver}"
   instance_details {
     instance_type = var.IC_ID_instance_type
     block_volumes {
       attach_details {
         type                                = var.volume_attachment_attachment_type
-        display_name                        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%03d", count.index + 1)}"
+        display_name                        = "${var.IC_display_name-k3sserver}-datadisk-${random_string.resource_code.result}"
         is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
       }
       create_details {
@@ -29,7 +28,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
         }
         availability_domain = var.IC_ID_LD_availability_domain
         compartment_id      = var.provider_compartment_id
-        display_name        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%03d", count.index + 1)}"
+        display_name        = "${var.IC_display_name-k3sserver}-datadisk-${random_string.resource_code.result}"
         size_in_gbs         = var.volume_size_in_gbs
         vpus_per_gb         = var.volume_vpus_per_gb
       }
