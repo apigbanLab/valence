@@ -37,7 +37,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
     launch_details {
       availability_domain = var.IC_ID_LD_availability_domain
       compartment_id      = var.provider_compartment_id
-      create_vnic_details = {
+      create_vnic_details {
         assign_private_dns_record = var.IC_ID_LD_create_vnic_details.assign_private_dns_record
         assign_public_ip          = var.IC_ID_LD_create_vnic_details.assign_public_ip
         subnet_id                 = oci_core_subnet.subnet_k3s-server.id
@@ -47,7 +47,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
         are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
       }
       is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
-      metadata = {
+      metadata {
         "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
       }
       shape                        = var.IC_ID_LD_shape-k3sserver
