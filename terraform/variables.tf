@@ -189,35 +189,35 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 # }
 
 # K3s Server - Internal LB - Parameters
-variable "k3sserver-ILB_display_name" {
-  type    = string
-  default = "k3sserver-lb"
-}
+# variable "k3sserver-ILB_display_name" {
+#   type    = string
+#   default = "k3sserver-lb"
+# }
 
 
-variable "k3sserver-ILB_shape" {
-  type    = string
-  default = "flexible"
-}
+# variable "k3sserver-ILB_shape" {
+#   type    = string
+#   default = "flexible"
+# }
 
-variable "k3sserver-ILB_ip_mode" {
-  type    = string
-  default = "IPV4"
-}
+# variable "k3sserver-ILB_ip_mode" {
+#   type    = string
+#   default = "IPV4"
+# }
 
-variable "k3sserver-ILB_is_private" {
-  type    = bool
-  default = true
-}
+# variable "k3sserver-ILB_is_private" {
+#   type    = bool
+#   default = true
+# }
 
-variable "k3sserver-ILB_shaped_details" {
-  description = "The shape details of the internal load balancer."
-  type        = map(any)
-  default = {
-    maximum_bandwidth_in_mbps = 50
-    minimum_bandwidth_in_mbps = 10
-  }
-}
+# variable "k3sserver-ILB_shaped_details" {
+#   description = "The shape details of the internal load balancer."
+#   type        = map(any)
+#   default = {
+#     maximum_bandwidth_in_mbps = 50
+#     minimum_bandwidth_in_mbps = 10
+#   }
+# }
 
 # K3s Server Instance Configuration parameters
 
@@ -273,50 +273,50 @@ variable "IC_source-k3sserver" {
   default = "NONE"
 }
 
-variable "vm_server_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.E2.1.Micro"
-}
+# variable "vm_server_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.E2.1.Micro"
+# }
 
-variable "vm_agent_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.A1.Flex"
-}
+# variable "vm_agent_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.A1.Flex"
+# }
 
-variable "vm_db_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.A1.Flex"
-}
+# variable "vm_db_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.A1.Flex"
+# }
 
-variable "vm_k3s_server_shape_config" {
-  description = "The shape configuration requested for the instance."
-  type        = map(any)
-  default = {
-    memory_in_gbs = "1"
-    ocpus         = "1"
-  }
-}
+# variable "vm_k3s_server_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "1"
+#     ocpus         = "1"
+#   }
+# }
 
-variable "vm_k3s_agent_shape_config" {
-  description = "The shape configuration requested for the instance."
-  type        = map(any)
-  default = {
-    memory_in_gbs = "6"
-    ocpus         = "1"
-  }
-}
+# variable "vm_k3s_agent_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "6"
+#     ocpus         = "1"
+#   }
+# }
 
-variable "vm_k3s_db_shape_config" {
-  description = "The shape configuration requested for the instance."
-  type        = map(any)
-  default = {
-    memory_in_gbs = "6"
-    ocpus         = "1"
-  }
-}
+# variable "vm_k3s_db_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "6"
+#     ocpus         = "1"
+#   }
+# }
 
 variable "vm_is_pv_encryption_in_transit_enabled" {
   description = "Whether to enable in-transit encryption for the data volume's paravirtualized attachment."
@@ -329,38 +329,38 @@ variable "vm_are_legacy_imds_endpoints_disabled" {
   default = true
 }
 
-variable "vm_availability_config" {
-  type = map(any)
-  default = {
-    recovery_action = "RESTORE_INSTANCE"
-  }
-}
+# variable "vm_availability_config" {
+#   type = map(any)
+#   default = {
+#     recovery_action = "RESTORE_INSTANCE"
+#   }
+# }
 
-variable "vm_availability_domain" {
-  type    = string
-  default = "ChLp:ME-DUBAI-1-AD-1"
-}
+# variable "vm_availability_domain" {
+#   type    = string
+#   default = "ChLp:ME-DUBAI-1-AD-1"
+# }
 
 # variable "vm_public_instance_name" {
 #   type    = string
 #   default = "one"
 # }
 
-variable "vm_x86_image_source_details" {
-  type = map(any)
-  default = {
-    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
-    source_type = "image"
-  }
-}
+# variable "vm_x86_image_source_details" {
+#   type = map(any)
+#   default = {
+#     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+#     source_type = "image"
+#   }
+# }
 
-variable "vm_aarch64_image_source_details" {
-  type = map(any)
-  default = {
-    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
-    source_type = "image"
-  }
-}
+# variable "vm_aarch64_image_source_details" {
+#   type = map(any)
+#   default = {
+#     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+#     source_type = "image"
+#   }
+# }
 
 
 variable "vm_launch_options" {
@@ -405,10 +405,10 @@ variable "volume_size_in_gbs" {
 #   default = "disk-attachment"
 # }
 
-variable "volume_is_pv_encryption_in_transit_enabled" {
-  type    = bool
-  default = true
-}
+# variable "volume_is_pv_encryption_in_transit_enabled" {
+#   type    = bool
+#   default = true
+# }
 
 # variable "key_name" {
 #   type    = string
