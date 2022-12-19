@@ -223,7 +223,7 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 
 variable "IC_display_name-k3sserver" {
   type    = string
-  default = "k3s server"
+  default = "k3sserver"
 }
 
 variable "IC_ID_instance_type" {
