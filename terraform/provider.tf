@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/tls"
       version = "4.0.4"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.4.3"
+    }
   }
   required_version = ">=v1.3.0"
 }
