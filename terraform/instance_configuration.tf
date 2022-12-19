@@ -60,8 +60,8 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
 
         #Optional
         boot_volume_size_in_gbs = var.IC_ID_LD_source_details-k3sserver.boot_volume_size_in_gbs
-        boot_volume_vpus_per_gb = var.var.IC_ID_LD_source_details-k3sserver.boot_volume_vpus_per_gb
-        source_id               = var.IC_ID_LD_source_details-k3sserver.source_id
+        boot_volume_vpus_per_gb = var.IC_ID_LD_source_details-k3sserver.boot_volume_vpus_per_gb
+        image_id                = var.IC_ID_LD_source_details-k3sserver.source_id
       }
     }
   }
