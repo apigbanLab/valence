@@ -10,6 +10,7 @@ resource "tls_private_key" "ssh_key" {
 }
 
 resource "oci_core_instance_configuration" "IC-k3sserver" {
+  count = 000
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
   display_name   = "${var.IC_display_name-k3sserver}-${random_string.resource_code}"
@@ -18,7 +19,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
     block_volumes {
       attach_details {
         type                                = var.volume_attachment_attachment_type
-        display_name                        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%0000d", count.index + 1)}"
+        display_name                        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%03d", count.index + 1)}"
         is_pv_encryption_in_transit_enabled = var.vm_launch_options.is_pv_encryption_in_transit_enabled
       }
       create_details {
@@ -28,7 +29,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
         }
         availability_domain = var.IC_ID_LD_availability_domain
         compartment_id      = var.provider_compartment_id
-        display_name        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%0000d", count.index + 1)}"
+        display_name        = "${var.IC_display_name-k3sserver}-${random_string.resource_code}-datadisk${format("%03d", count.index + 1)}"
         size_in_gbs         = var.volume_size_in_gbs
         vpus_per_gb         = var.volume_vpus_per_gb
       }
@@ -49,7 +50,6 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
       metadata = {
         "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
       }
-      preferred_maintenance_action = var.instance_configuration_instance_details_launch_details_preferred_maintenance_action
       shape                        = var.IC_ID_LD_shape-k3sserver
       shape_config {
         memory_in_gbs = var.instance_configuration_instance_details_launch_details_shape_config_memory_in_gbs
