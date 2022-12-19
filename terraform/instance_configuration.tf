@@ -10,7 +10,7 @@ resource "tls_private_key" "ssh_key" {
 }
 
 resource "oci_core_instance_configuration" "IC-k3sserver" {
-  count = 000
+  count          = 000
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
   display_name   = "${var.IC_display_name-k3sserver}-${random_string.resource_code}"
@@ -47,15 +47,22 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
         are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
       }
       is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
-      metadata {
-        "ssh_authorized_keys" = tls_private_key.ssh_key.public_key_openssh
+      metadata = {
+        "ssh_authorized_keys" : tls_private_key.ssh_key.public_key_openssh
       }
-      shape                        = var.IC_ID_LD_shape-k3sserver
+      shape = var.IC_ID_LD_shape-k3sserver
       shape_config {
         memory_in_gbs = var.IC_ID_LD_shape_config-k3sserver.memory_in_gbs
         ocpus         = var.IC_ID_LD_shape_config-k3sserver.ocpus
       }
-      source_details = var.IC_ID_LD_source_details-k3sserver
+      source_details {
+        source_type = var.IC_ID_LD_source_details-k3sserver.source_type
+
+        #Optional
+        boot_volume_size_in_gbs = var.IC_ID_LD_source_details-k3sserver.boot_volume_size_in_gbs
+        boot_volume_vpus_per_gb = var.var.IC_ID_LD_source_details-k3sserver.boot_volume_vpus_per_gb
+        source_id               = var.IC_ID_LD_source_details-k3sserver.source_id
+      }
     }
   }
 }
