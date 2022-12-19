@@ -419,3 +419,14 @@ variable "workstation_publicIPAddress" {
   description = "The current Public IP address where terraform apply is going to be executed"
   type        = string
 }
+
+# Instance Pool Parameters
+variable "k3sserver-IP_display_name" {
+  type = string
+  default = "k3sserver"
+}
+
+variable "k3sserver-IP_size" {
+  type = number
+  default = 1
+}
