@@ -12,7 +12,7 @@ resource "tls_private_key" "ssh_key" {
 resource "oci_core_instance_configuration" "IC-k3sserver" {
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
-  display_name   = "${var.IC_display_name-k3sserver}"
+  display_name   = var.IC_display_name-k3sserver
   instance_details {
     instance_type = var.IC_ID_instance_type
     block_volumes {
