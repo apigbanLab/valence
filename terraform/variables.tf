@@ -422,11 +422,51 @@ variable "workstation_publicIPAddress" {
 
 # Instance Pool Parameters
 variable "k3sserver-IP_display_name" {
-  type = string
+  type    = string
   default = "k3sserver"
 }
 
 variable "k3sserver-IP_size" {
-  type = number
+  type    = number
   default = 1
 }
+
+# Autoscaling Parameters
+variable "k3sserver-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sserver-ASC_policies_display_name" {
+  type    = string
+  default = "k3sserver-increase"
+}
+
+variable "k3sserver-ASC_policies_capacity_max" {
+  type    = number
+  default = 2
+}
+
+variable "k3sserver-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sserver-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sserver-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sserver-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sserver-scale_out"
+}
+
+# variable "k3sserver-ASC-policies_rules_metric_threshold_operator_GTE" {
+#   type    = string
+#   default = "GTE"
+# }
