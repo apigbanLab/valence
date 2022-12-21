@@ -194,7 +194,6 @@ variable "k3sserver-ILB_display_name" {
   default = "k3sserver-ILB"
 }
 
-
 variable "k3sserver-ILB_shape" {
   type    = string
   default = "flexible"
@@ -225,6 +224,86 @@ variable "k3sserver-ILB_BackendSet_name" {
 }
 
 variable "k3sserver-ILB_BackendSet_policy" {
+  type    = string
+  default = "ROUND_ROBIN"
+}
+
+#K3s Agent - Internal LB - Parameters
+variable "k3sagent-ILB_display_name" {
+  type    = string
+  default = "k3sagent-ILB"
+}
+
+variable "k3sagent-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
+
+variable "k3sagent-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
+
+variable "k3sagent-ILB_is_private" {
+  type    = bool
+  default = true
+}
+
+variable "k3sagent-ILB_shape_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 10
+    minimum_bandwidth_in_mbps = 10
+  }
+}
+
+variable "k3sagent-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-agents"
+}
+
+variable "k3sagent-ILB_BackendSet_policy" {
+  type    = string
+  default = "ROUND_ROBIN"
+}
+
+#K3s DB - Internal LB - Parameters
+variable "k3sdb-ILB_display_name" {
+  type    = string
+  default = "k3sagent-ILB"
+}
+
+variable "k3sdb-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
+
+variable "k3sdb-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
+
+variable "k3sdb-ILB_is_private" {
+  type    = bool
+  default = true
+}
+
+variable "k3sdb-ILB_shape_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 10
+    minimum_bandwidth_in_mbps = 10
+  }
+}
+
+variable "k3sdb-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-dbs"
+}
+
+variable "k3sdb-ILB_BackendSet_policy" {
   type    = string
   default = "ROUND_ROBIN"
 }
