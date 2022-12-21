@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/random"
       version = "3.4.3"
     }
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "2.2.0"
+    }
   }
   required_version = ">=v1.3.0"
 }

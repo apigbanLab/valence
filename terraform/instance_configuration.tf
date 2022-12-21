@@ -9,6 +9,16 @@ resource "tls_private_key" "ssh_key" {
   rsa_bits  = 4096
 }
 
+# cloud-init config that installs the provisioning scripts
+data "cloudinit_config" "k3s-server-cfg" {
+  gzip          = true
+  base64_encode = true
+  part {
+    content_type = "text/cloud-config"
+    content      = file("scripts/cloud-config.cfg")
+  }
+}
+
 resource "oci_core_instance_configuration" "IC-k3sserver" {
   compartment_id = var.provider_compartment_id
   source         = var.IC_source-k3sserver
@@ -48,6 +58,7 @@ resource "oci_core_instance_configuration" "IC-k3sserver" {
       is_pv_encryption_in_transit_enabled = var.vm_is_pv_encryption_in_transit_enabled
       metadata = {
         "ssh_authorized_keys" : tls_private_key.ssh_key.public_key_openssh
+        "user_data" : data.cloudinit_config.k3s-server-cfg.rendered
       }
       shape = var.IC_ID_LD_shape-k3sserver
       shape_config {
