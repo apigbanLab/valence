@@ -50,7 +50,7 @@ resource "oci_core_instance_pool" "IP-k3sdb" {
   load_balancers {
     backend_set_name = oci_load_balancer_backend_set.k3sdb-ILB-BackendSet.name
     load_balancer_id = oci_load_balancer_load_balancer.k3sdb-ILB.id
-    port             = 6443
+    port             = 5432
     vnic_selection   = "PrimaryVnic"
   }
   provisioner "local-exec" {

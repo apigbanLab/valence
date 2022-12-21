@@ -116,7 +116,7 @@ variable "subnet_k3s-agent_cidr_block" {
 
 variable "subnet_k3s-agent_dns_label" {
   type    = string
-  default = "k3sdb"
+  default = "k3sagent"
 }
 
 variable "subnet_k3s-agent_prohibit_public_ip_on_vnic" {
@@ -271,7 +271,7 @@ variable "k3sagent-ILB_BackendSet_policy" {
 #K3s DB - Internal LB - Parameters
 variable "k3sdb-ILB_display_name" {
   type    = string
-  default = "k3sagent-ILB"
+  default = "k3sdb-ILB"
 }
 
 variable "k3sdb-ILB_shape" {
@@ -671,7 +671,7 @@ variable "k3sagent-ASC_policies_rules_display_name" {
   default = "k3sagent-autoscale"
 }
 
-# K3s Agent Instance Pool Parameters
+# K3s DB Instance Pool Parameters
 variable "k3sdb-IP_display_name" {
   type    = string
   default = "k3sdb"
@@ -682,7 +682,7 @@ variable "k3sdb-IP_size" {
   default = 1
 }
 
-# K3s Agent Autoscaling Parameters
+#K3s DB Autoscaling Parameters
 variable "k3sdb-ASC_target_type" {
   type    = string
   default = "instancePool"

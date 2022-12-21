@@ -144,6 +144,21 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_pos
   }
 }
 
+resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-db_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 5432
+      min = 5432
+    }
+  }
+}
+
 # Rules related to k3s-agent-subnet-nsg
 # EGRESS
 resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" {
@@ -181,8 +196,23 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   source_type               = "NETWORK_SECURITY_GROUP"
   tcp_options {
     destination_port_range {
-      max = 5432
-      min = 5432
+      max = 6443
+      min = 6443
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-agent_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 6443
+      min = 6443
     }
   }
 }

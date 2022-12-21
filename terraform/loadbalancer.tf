@@ -72,6 +72,42 @@ resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
   policy           = var.k3sserver-ILB_BackendSet_policy
 }
 
+resource "oci_load_balancer_backend_set" "k3sagent-ILB-BackendSet" {
+  #Required
+  health_checker {
+    #Required
+    protocol = "HTTP"
+
+    #Optional
+    interval_ms       = 10000
+    port              = 6443
+    retries           = 3
+    return_code       = 200
+    timeout_in_millis = 2000
+    url_path          = "/readyz"
+  }
+  load_balancer_id = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name             = var.k3sagent-ILB_BackendSet_name
+  policy           = var.k3sagent-ILB_BackendSet_policy
+}
+
+resource "oci_load_balancer_backend_set" "k3sdb-ILB-BackendSet" {
+  #Required
+  health_checker {
+    #Required
+    protocol = "TCP"
+
+    #Optional
+    interval_ms       = 10000
+    port              = 5432
+    retries           = 3
+    timeout_in_millis = 2000
+  }
+  load_balancer_id = oci_load_balancer_load_balancer.k3sdb-ILB.id
+  name             = var.k3sdb-ILB_BackendSet_name
+  policy           = var.k3sdb-ILB_BackendSet_policy
+}
+
 # #K3sserver Listeners
 # resource "oci_load_balancer_listener" "k3sserver" {
 #   #Required
