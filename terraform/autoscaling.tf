@@ -45,6 +45,6 @@ resource "oci_autoscaling_auto_scaling_configuration" "k3sserver-ASC" {
     }
   }
 
-  display_name = var.k3s
-  is_enabled   = var.auto_scaling_configuration_is_enabled
+  display_name = "k3sserver-ASC"
+  is_enabled   = true
 }
