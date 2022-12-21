@@ -8,9 +8,9 @@ resource "oci_core_instance_pool" "IP-k3sserver" {
   size         = var.k3sserver-IP_size
   display_name = var.k3sserver-IP_display_name
   load_balancers {
-      backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
-      load_balancer_id = oci_load_balancer_load_balancer.k3sserver-ILB.id
-      port = 6443
-      vnic_selection = "PrimaryVnic"
+    backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+    load_balancer_id = oci_load_balancer_load_balancer.k3sserver-ILB.id
+    port             = 6443
+    vnic_selection   = "PrimaryVnic"
   }
 }

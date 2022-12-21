@@ -30,9 +30,9 @@ resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
     timeout_in_millis = 2000
     url_path          = "/readyz"
   }
-  load_balancer_id                  = oci_load_balancer_load_balancer.k3sserver-ILB.id
-  name                              = var.k3sserver-ILB_BackendSet_name
-  policy                            = var.k3sserver-ILB_BackendSet_policy
+  load_balancer_id = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name             = var.k3sserver-ILB_BackendSet_name
+  policy           = var.k3sserver-ILB_BackendSet_policy
 }
 
 # #K3sserver Listeners

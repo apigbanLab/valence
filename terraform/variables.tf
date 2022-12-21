@@ -449,7 +449,7 @@ variable "k3sserver-ASC_target_type" {
 
 variable "k3sserver-ASC_policies_display_name" {
   type    = string
-  default = "k3sserver-increase"
+  default = "k3sserver-ASC"
 }
 
 variable "k3sserver-ASC_policies_capacity_max" {
