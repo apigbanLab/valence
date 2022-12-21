@@ -215,7 +215,7 @@ variable "k3sserver-ILB_shape_details" {
   type        = map(any)
   default = {
     maximum_bandwidth_in_mbps = 10
-    minimum_bandwidth_in_mbps = 1
+    minimum_bandwidth_in_mbps = 10
   }
 }
 
@@ -226,7 +226,7 @@ variable "k3sserver-ILB_BackendSet_name" {
 
 variable "k3sserver-ILB_BackendSet_policy" {
   type    = string
-  default = "5-Tuple Hash"
+  default = "ROUND_ROBIN"
 }
 
 # K3s Server Instance Configuration parameters
