@@ -20,7 +20,7 @@ resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
   #Required
   health_checker {
     #Required
-    protocol = "TCP"
+    protocol = "HTTP"
 
     #Optional
     interval_ms       = 10000
