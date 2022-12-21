@@ -188,36 +188,46 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 #   type        = number
 # }
 
-# K3s Server - Internal LB - Parameters
-# variable "k3sserver-ILB_display_name" {
-#   type    = string
-#   default = "k3sserver-lb"
-# }
+#K3s Server - Internal LB - Parameters
+variable "k3sserver-ILB_display_name" {
+  type    = string
+  default = "k3sserver-ILB"
+}
 
 
-# variable "k3sserver-ILB_shape" {
-#   type    = string
-#   default = "flexible"
-# }
+variable "k3sserver-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
 
-# variable "k3sserver-ILB_ip_mode" {
-#   type    = string
-#   default = "IPV4"
-# }
+variable "k3sserver-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
 
-# variable "k3sserver-ILB_is_private" {
-#   type    = bool
-#   default = true
-# }
+variable "k3sserver-ILB_is_private" {
+  type    = bool
+  default = true
+}
 
-# variable "k3sserver-ILB_shaped_details" {
-#   description = "The shape details of the internal load balancer."
-#   type        = map(any)
-#   default = {
-#     maximum_bandwidth_in_mbps = 50
-#     minimum_bandwidth_in_mbps = 10
-#   }
-# }
+variable "k3sserver-ILB_shape_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 10
+    minimum_bandwidth_in_mbps = 1
+  }
+}
+
+variable "k3sserver-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-servers"
+}
+
+variable "k3sserver-ILB_BackendSet_policy" {
+  type    = string
+  default = "5-Tuple Hash"
+}
 
 # K3s Server Instance Configuration parameters
 

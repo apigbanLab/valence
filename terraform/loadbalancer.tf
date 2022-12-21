@@ -1,34 +1,39 @@
-# resource "oci_load_balancer_load_balancer" "k3sserver-lb" {
-#   #Required
-#   compartment_id = var.provider_compartment_id
-#   display_name   = var.k3sserver-ILB_display_name
-#   # shape          = var.k3sserver-ILB_shape
-#   shape      = var.k3sserver-ILB_shape
-#   subnet_ids = [oci_core_subnet.subnet_k3s-server.id]
+resource "oci_load_balancer_load_balancer" "k3sserver-ILB" {
+  #Required
+  compartment_id = var.provider_compartment_id
+  display_name   = var.k3sserver-ILB_display_name
+  shape          = var.k3sserver-ILB_shape
+  subnet_ids     = [oci_core_subnet.subnet_k3s-server.id]
 
-#   #Optional
-#   ip_mode                    = var.k3sserver-ILB_ip_mode
-#   is_private                 = var.k3sserver-ILB_is_private
-#   network_security_group_ids = [oci_core_network_security_group.k3s-server_nsg.id]
+  #Optional
+  ip_mode                    = var.k3sserver-ILB_ip_mode
+  is_private                 = var.k3sserver-ILB_is_private
+  network_security_group_ids = [oci_core_network_security_group.k3s-server_nsg.id]
 
-#   shape_details {
-#     #Required
-#     maximum_bandwidth_in_mbps = var.k3sserver-ILB_shaped_details.maximum_bandwidth_in_mbps
-#     minimum_bandwidth_in_mbps = var.k3sserver-ILB_shaped_details.minimum_bandwidth_in_mbps
-#   }
-# }
+  shape_details {
+    maximum_bandwidth_in_mbps = var.k3sserver-ILB_shape_details.maximum_bandwidth_in_mbps
+    minimum_bandwidth_in_mbps = var.k3sserver-ILB_shape_details.minimum_bandwidth_in_mbps
+  }
+}
 
-# resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
-#   #Required
-#   health_checker                    = var.k3sserver-ILB_BackendSet_hc-kubeapiserver
-#   load_balancer_id                  = oci_load_balancer_load_balancer.k3sserver-lb.id
-#   name                              = var.k3sserver-ILB_Listener_default_backend_set_name
-#   policy                            = var.k3sserver-ILB_BackendSet_Policy
-#   session_persistence_configuration = var.k3sserver-ILB_BackendSet_SessionPersistence
-#   #TODO: 
-#   #Optional
-#   lb_cookie_session_persistence_configuration = var.k3sserver-ILB_BackendSet_SessionPersistence_lb_cookie_session_persistence_configuration
-# }
+resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
+  #Required
+  health_checker {
+    #Required
+    protocol = "TCP"
+
+    #Optional
+    interval_ms       = 10000
+    port              = 6443
+    retries           = 3
+    return_code       = 200
+    timeout_in_millis = 2000
+    url_path          = "/readyz"
+  }
+  load_balancer_id                  = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                              = var.k3sserver-ILB_BackendSet_name
+  policy                            = var.k3sserver-ILB_BackendSet_policy
+}
 
 # #K3sserver Listeners
 # resource "oci_load_balancer_listener" "k3sserver" {
