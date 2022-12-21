@@ -116,7 +116,7 @@ variable "subnet_k3s-agent_cidr_block" {
 
 variable "subnet_k3s-agent_dns_label" {
   type    = string
-  default = "k3sagent"
+  default = "k3sdb"
 }
 
 variable "subnet_k3s-agent_prohibit_public_ip_on_vnic" {
@@ -279,6 +279,76 @@ variable "IC_ID_LD_source_details-k3sserver" {
 }
 
 variable "IC_source-k3sserver" {
+  type    = string
+  default = "NONE"
+}
+
+# K3s Server Instance Configuration parameters
+variable "IC_display_name-k3sagent" {
+  type    = string
+  default = "k3sagent"
+}
+
+variable "IC_ID_LD_shape-k3sagent" {
+  type    = string
+  default = "VM.Standard.A1.Flex"
+}
+
+variable "IC_ID_LD_shape_config-k3sagent" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "6"
+    ocpus         = "1"
+  }
+}
+
+variable "IC_ID_LD_source_details-k3sagent" {
+  type = map(any)
+  default = {
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+    source_type             = "image"
+    boot_volume_size_in_gbs = 50
+    boot_volume_vpus_per_gb = 10
+  }
+}
+
+variable "IC_source-k3sagent" {
+  type    = string
+  default = "NONE"
+}
+
+# K3s DB Instance Configuration parameters
+variable "IC_display_name-k3sdb" {
+  type    = string
+  default = "k3sdb"
+}
+
+variable "IC_ID_LD_shape-k3sdb" {
+  type    = string
+  default = "VM.Standard.A1.Flex"
+}
+
+variable "IC_ID_LD_shape_config-k3sdb" {
+  description = "The shape configuration requested for the instance."
+  type        = map(any)
+  default = {
+    memory_in_gbs = "6"
+    ocpus         = "1"
+  }
+}
+
+variable "IC_ID_LD_source_details-k3sdb" {
+  type = map(any)
+  default = {
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+    source_type             = "image"
+    boot_volume_size_in_gbs = 50
+    boot_volume_vpus_per_gb = 10
+  }
+}
+
+variable "IC_source-k3sdb" {
   type    = string
   default = "NONE"
 }
