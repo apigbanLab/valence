@@ -183,8 +183,8 @@ resource "oci_core_instance_configuration" "IC-k3sdb" {
       create_vnic_details {
         assign_private_dns_record = var.IC_ID_LD_create_vnic_details.assign_private_dns_record
         assign_public_ip          = var.IC_ID_LD_create_vnic_details.assign_public_ip
-        subnet_id                 = oci_core_subnet.subnet_k3sdb.id
-        nsg_ids                   = [oci_core_network_security_group.k3sdb_nsg.id]
+        subnet_id                 = oci_core_subnet.subnet_k3s-db.id
+        nsg_ids                   = [oci_core_network_security_group.k3s-db_nsg.id]
       }
       instance_options {
         are_legacy_imds_endpoints_disabled = var.vm_are_legacy_imds_endpoints_disabled
