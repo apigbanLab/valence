@@ -13,4 +13,7 @@ resource "oci_core_instance_pool" "IP-k3sserver" {
     port             = 6443
     vnic_selection   = "PrimaryVnic"
   }
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey"
+  }
 }
