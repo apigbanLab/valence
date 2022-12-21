@@ -500,7 +500,7 @@ variable "workstation_publicIPAddress" {
   type        = string
 }
 
-# Instance Pool Parameters
+# K3s Server Instance Pool Parameters
 variable "k3sserver-IP_display_name" {
   type    = string
   default = "k3sserver"
@@ -543,7 +543,99 @@ variable "k3sserver-ASC_policies_policy_type" {
 }
 variable "k3sserver-ASC_policies_rules_display_name" {
   type    = string
-  default = "k3sserver-scale_out"
+  default = "k3sserver-autoscale"
+}
+
+# K3s Agent Instance Pool Parameters
+variable "k3sagent-IP_display_name" {
+  type    = string
+  default = "k3sagent"
+}
+
+variable "k3sagent-IP_size" {
+  type    = number
+  default = 1
+}
+
+# K3s Agent Autoscaling Parameters
+variable "k3sagent-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sagent-ASC_policies_display_name" {
+  type    = string
+  default = "k3sagent-ASC"
+}
+
+variable "k3sagent-ASC_policies_capacity_max" {
+  type    = number
+  default = 5
+}
+
+variable "k3sagent-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sagent-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sagent-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sagent-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sagent-autoscale"
+}
+
+# K3s Agent Instance Pool Parameters
+variable "k3sdb-IP_display_name" {
+  type    = string
+  default = "k3sdb"
+}
+
+variable "k3sdb-IP_size" {
+  type    = number
+  default = 1
+}
+
+# K3s Agent Autoscaling Parameters
+variable "k3sdb-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sdb-ASC_policies_display_name" {
+  type    = string
+  default = "k3sdb-ASC"
+}
+
+variable "k3sdb-ASC_policies_capacity_max" {
+  type    = number
+  default = 5
+}
+
+variable "k3sdb-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sdb-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sdb-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sdb-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sdb-autoscale"
 }
 
 # variable "k3sserver-ASC-policies_rules_metric_threshold_operator_GTE" {
