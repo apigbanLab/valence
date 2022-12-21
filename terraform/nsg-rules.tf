@@ -26,7 +26,22 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver" {
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver01" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-server_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 6443
+      min = 6443
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver02" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
