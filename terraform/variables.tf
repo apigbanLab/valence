@@ -188,12 +188,11 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
 #   type        = number
 # }
 
-# K3s Server - Internal LB - Parameters
+#K3s Server - Internal LB - Parameters
 variable "k3sserver-ILB_display_name" {
   type    = string
-  default = "k3sserver-lb"
+  default = "k3sserver-ILB"
 }
-
 
 variable "k3sserver-ILB_shape" {
   type    = string
@@ -210,34 +209,136 @@ variable "k3sserver-ILB_is_private" {
   default = true
 }
 
-variable "k3sserver-ILB_shaped_details" {
+variable "k3sserver-ILB_shape_details" {
   description = "The shape details of the internal load balancer."
   type        = map(any)
   default = {
-    maximum_bandwidth_in_mbps = 50
+    maximum_bandwidth_in_mbps = 10
     minimum_bandwidth_in_mbps = 10
   }
 }
 
-variable "vm_server_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.E2.1.Micro"
+variable "k3sserver-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-servers"
 }
 
-variable "vm_agent_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.A1.Flex"
+variable "k3sserver-ILB_BackendSet_policy" {
+  type    = string
+  default = "ROUND_ROBIN"
 }
 
-variable "vm_db_shape" {
-  description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
-  type        = string
-  default     = "VM.Standard.A1.Flex"
+#K3s Agent - Internal LB - Parameters
+variable "k3sagent-ILB_display_name" {
+  type    = string
+  default = "k3sagent-ILB"
 }
 
-variable "vm_k3s_server_shape_config" {
+variable "k3sagent-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
+
+variable "k3sagent-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
+
+variable "k3sagent-ILB_is_private" {
+  type    = bool
+  default = true
+}
+
+variable "k3sagent-ILB_shape_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 10
+    minimum_bandwidth_in_mbps = 10
+  }
+}
+
+variable "k3sagent-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-agents"
+}
+
+variable "k3sagent-ILB_BackendSet_policy" {
+  type    = string
+  default = "ROUND_ROBIN"
+}
+
+#K3s DB - Internal LB - Parameters
+variable "k3sdb-ILB_display_name" {
+  type    = string
+  default = "k3sdb-ILB"
+}
+
+variable "k3sdb-ILB_shape" {
+  type    = string
+  default = "flexible"
+}
+
+variable "k3sdb-ILB_ip_mode" {
+  type    = string
+  default = "IPV4"
+}
+
+variable "k3sdb-ILB_is_private" {
+  type    = bool
+  default = true
+}
+
+variable "k3sdb-ILB_shape_details" {
+  description = "The shape details of the internal load balancer."
+  type        = map(any)
+  default = {
+    maximum_bandwidth_in_mbps = 10
+    minimum_bandwidth_in_mbps = 10
+  }
+}
+
+variable "k3sdb-ILB_BackendSet_name" {
+  type    = string
+  default = "k3s-dbs"
+}
+
+variable "k3sdb-ILB_BackendSet_policy" {
+  type    = string
+  default = "ROUND_ROBIN"
+}
+
+# K3s Server Instance Configuration parameters
+
+variable "IC_display_name-k3sserver" {
+  type    = string
+  default = "k3sserver"
+}
+
+variable "IC_ID_instance_type" {
+  type    = string
+  default = "compute"
+}
+
+variable "IC_ID_LD_availability_domain" {
+  type    = string
+  default = "ChLp:ME-DUBAI-1-AD-1"
+}
+
+variable "IC_ID_LD_create_vnic_details" {
+  type = map(any)
+  default = {
+    assign_private_dns_record = "true"
+    assign_public_ip          = "true"
+  }
+}
+
+variable "IC_ID_LD_shape-k3sserver" {
+  type    = string
+  default = "VM.Standard.E2.1.Micro"
+}
+
+variable "IC_ID_LD_shape_config-k3sserver" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
@@ -246,7 +347,33 @@ variable "vm_k3s_server_shape_config" {
   }
 }
 
-variable "vm_k3s_agent_shape_config" {
+variable "IC_ID_LD_source_details-k3sserver" {
+  type = map(any)
+  default = {
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+    source_type             = "image"
+    boot_volume_size_in_gbs = 50
+    boot_volume_vpus_per_gb = 10
+  }
+}
+
+variable "IC_source-k3sserver" {
+  type    = string
+  default = "NONE"
+}
+
+# K3s Server Instance Configuration parameters
+variable "IC_display_name-k3sagent" {
+  type    = string
+  default = "k3sagent"
+}
+
+variable "IC_ID_LD_shape-k3sagent" {
+  type    = string
+  default = "VM.Standard.A1.Flex"
+}
+
+variable "IC_ID_LD_shape_config-k3sagent" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
@@ -255,7 +382,33 @@ variable "vm_k3s_agent_shape_config" {
   }
 }
 
-variable "vm_k3s_db_shape_config" {
+variable "IC_ID_LD_source_details-k3sagent" {
+  type = map(any)
+  default = {
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+    source_type             = "image"
+    boot_volume_size_in_gbs = 50
+    boot_volume_vpus_per_gb = 10
+  }
+}
+
+variable "IC_source-k3sagent" {
+  type    = string
+  default = "NONE"
+}
+
+# K3s DB Instance Configuration parameters
+variable "IC_display_name-k3sdb" {
+  type    = string
+  default = "k3sdb"
+}
+
+variable "IC_ID_LD_shape-k3sdb" {
+  type    = string
+  default = "VM.Standard.A1.Flex"
+}
+
+variable "IC_ID_LD_shape_config-k3sdb" {
   description = "The shape configuration requested for the instance."
   type        = map(any)
   default = {
@@ -263,6 +416,66 @@ variable "vm_k3s_db_shape_config" {
     ocpus         = "1"
   }
 }
+
+variable "IC_ID_LD_source_details-k3sdb" {
+  type = map(any)
+  default = {
+    source_id               = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+    source_type             = "image"
+    boot_volume_size_in_gbs = 50
+    boot_volume_vpus_per_gb = 10
+  }
+}
+
+variable "IC_source-k3sdb" {
+  type    = string
+  default = "NONE"
+}
+
+# variable "vm_server_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.E2.1.Micro"
+# }
+
+# variable "vm_agent_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.A1.Flex"
+# }
+
+# variable "vm_db_shape" {
+#   description = "The shape of an instance. The shape determines the number of CPUs, amount of memory, and other resources allocated to the instance."
+#   type        = string
+#   default     = "VM.Standard.A1.Flex"
+# }
+
+# variable "vm_k3s_server_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "1"
+#     ocpus         = "1"
+#   }
+# }
+
+# variable "vm_k3s_agent_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "6"
+#     ocpus         = "1"
+#   }
+# }
+
+# variable "vm_k3s_db_shape_config" {
+#   description = "The shape configuration requested for the instance."
+#   type        = map(any)
+#   default = {
+#     memory_in_gbs = "6"
+#     ocpus         = "1"
+#   }
+# }
 
 variable "vm_is_pv_encryption_in_transit_enabled" {
   description = "Whether to enable in-transit encryption for the data volume's paravirtualized attachment."
@@ -275,38 +488,38 @@ variable "vm_are_legacy_imds_endpoints_disabled" {
   default = true
 }
 
-variable "vm_availability_config" {
-  type = map(any)
-  default = {
-    recovery_action = "RESTORE_INSTANCE"
-  }
-}
+# variable "vm_availability_config" {
+#   type = map(any)
+#   default = {
+#     recovery_action = "RESTORE_INSTANCE"
+#   }
+# }
 
-variable "vm_availability_domain" {
-  type    = string
-  default = "ChLp:ME-DUBAI-1-AD-1"
-}
+# variable "vm_availability_domain" {
+#   type    = string
+#   default = "ChLp:ME-DUBAI-1-AD-1"
+# }
 
 # variable "vm_public_instance_name" {
 #   type    = string
 #   default = "one"
 # }
 
-variable "vm_x86_image_source_details" {
-  type = map(any)
-  default = {
-    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
-    source_type = "image"
-  }
-}
+# variable "vm_x86_image_source_details" {
+#   type = map(any)
+#   default = {
+#     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa5ickw7n4ds2qn7b2xjlrdoo7bbpts4i4wbolr6q36k33awbzjexa"
+#     source_type = "image"
+#   }
+# }
 
-variable "vm_aarch64_image_source_details" {
-  type = map(any)
-  default = {
-    source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
-    source_type = "image"
-  }
-}
+# variable "vm_aarch64_image_source_details" {
+#   type = map(any)
+#   default = {
+#     source_id   = "ocid1.image.oc1.me-dubai-1.aaaaaaaa7jbzbtjqppye75wes5qmvlobsn3cvp2dvarym365wnem7r2celwq"
+#     source_type = "image"
+#   }
+# }
 
 
 variable "vm_launch_options" {
@@ -351,10 +564,10 @@ variable "volume_size_in_gbs" {
 #   default = "disk-attachment"
 # }
 
-variable "volume_is_pv_encryption_in_transit_enabled" {
-  type    = bool
-  default = true
-}
+# variable "volume_is_pv_encryption_in_transit_enabled" {
+#   type    = bool
+#   default = true
+# }
 
 # variable "key_name" {
 #   type    = string
@@ -365,3 +578,146 @@ variable "workstation_publicIPAddress" {
   description = "The current Public IP address where terraform apply is going to be executed"
   type        = string
 }
+
+# K3s Server Instance Pool Parameters
+variable "k3sserver-IP_display_name" {
+  type    = string
+  default = "k3sserver"
+}
+
+variable "k3sserver-IP_size" {
+  type    = number
+  default = 1
+}
+
+# Autoscaling Parameters
+variable "k3sserver-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sserver-ASC_policies_display_name" {
+  type    = string
+  default = "k3sserver-ASC"
+}
+
+variable "k3sserver-ASC_policies_capacity_max" {
+  type    = number
+  default = 2
+}
+
+variable "k3sserver-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sserver-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sserver-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sserver-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sserver-autoscale"
+}
+
+# K3s Agent Instance Pool Parameters
+variable "k3sagent-IP_display_name" {
+  type    = string
+  default = "k3sagent"
+}
+
+variable "k3sagent-IP_size" {
+  type    = number
+  default = 1
+}
+
+# K3s Agent Autoscaling Parameters
+variable "k3sagent-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sagent-ASC_policies_display_name" {
+  type    = string
+  default = "k3sagent-ASC"
+}
+
+variable "k3sagent-ASC_policies_capacity_max" {
+  type    = number
+  default = 5
+}
+
+variable "k3sagent-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sagent-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sagent-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sagent-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sagent-autoscale"
+}
+
+# K3s DB Instance Pool Parameters
+variable "k3sdb-IP_display_name" {
+  type    = string
+  default = "k3sdb"
+}
+
+variable "k3sdb-IP_size" {
+  type    = number
+  default = 1
+}
+
+#K3s DB Autoscaling Parameters
+variable "k3sdb-ASC_target_type" {
+  type    = string
+  default = "instancePool"
+}
+
+variable "k3sdb-ASC_policies_display_name" {
+  type    = string
+  default = "k3sdb-ASC"
+}
+
+variable "k3sdb-ASC_policies_capacity_max" {
+  type    = number
+  default = 5
+}
+
+variable "k3sdb-ASC_policies_capacity_min" {
+  type    = number
+  default = 1
+}
+
+variable "k3sdb-ASC_policies_capacity_initial" {
+  type    = number
+  default = 1
+}
+
+variable "k3sdb-ASC_policies_policy_type" {
+  type    = string
+  default = "threshold"
+}
+variable "k3sdb-ASC_policies_rules_display_name" {
+  type    = string
+  default = "k3sdb-autoscale"
+}
+
+# variable "k3sserver-ASC-policies_rules_metric_threshold_operator_GTE" {
+#   type    = string
+#   default = "GTE"
+# }

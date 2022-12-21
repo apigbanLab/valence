@@ -16,7 +16,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -26,7 +26,22 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver" {
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver01" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-server_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 6443
+      min = 6443
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_kubeapiserver02" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
@@ -104,7 +119,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -120,6 +135,21 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_pos
   direction                 = "INGRESS"
   protocol                  = "6"
   source                    = oci_core_network_security_group.k3s-server_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 5432
+      min = 5432
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-db_nsg.id
   source_type               = "NETWORK_SECURITY_GROUP"
   tcp_options {
     destination_port_range {
@@ -147,7 +177,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = var.workstation_publicIPAddress
+  source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -166,8 +196,23 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   source_type               = "NETWORK_SECURITY_GROUP"
   tcp_options {
     destination_port_range {
-      max = 5432
-      min = 5432
+      max = 6443
+      min = 6443
+    }
+  }
+}
+
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = oci_core_network_security_group.k3s-agent_nsg.id
+  source_type               = "NETWORK_SECURITY_GROUP"
+  tcp_options {
+    destination_port_range {
+      max = 6443
+      min = 6443
     }
   }
 }
