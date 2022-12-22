@@ -228,6 +228,32 @@ variable "k3sserver-ILB_BackendSet_policy" {
   default = "ROUND_ROBIN"
 }
 
+# variable "k3sserver-ILB_Listener_display_name-kubeapiserver" {
+#   type    = string
+#   default = "kubeapiserver"
+# }
+
+# variable "k3sserver-ILB_Listener_port-kubeapiserver" {
+#   description = "Agents need to reach this port for registration to the cluster"
+#   type        = number
+#   default     = 6443
+# }
+
+# variable "k3sserver-ILB_Listener_protocol-kubeapiserver" {
+#   description = "Agents need to reach this protocol for registration to the cluster"
+#   type        = string
+#   default     = "TCP"
+# }
+
+variable "k3sserver-ILB_Listener_connection_configuration" {
+  description = "TCP connection properties"
+  type        = map(any)
+  default = {
+    idle_timeout_in_seconds            = 30
+    backend_tcp_proxy_protocol_version = 2
+  }
+}
+
 #K3s Agent - Internal LB - Parameters
 variable "k3sagent-ILB_display_name" {
   type    = string
@@ -266,6 +292,131 @@ variable "k3sagent-ILB_BackendSet_name" {
 variable "k3sagent-ILB_BackendSet_policy" {
   type    = string
   default = "ROUND_ROBIN"
+}
+
+variable "k3sserver-ILB_Listener_kubeapiserver" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "kubeapiserver"
+    "port"         = 6443
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sserver-ILB_Listener_wireguardVxlan" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "wireguardVxlan"
+    "port"         = 8472
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sserver-ILB_Listener_metrics" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "metrics"
+    "port"         = 10250
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sserver-ILB_Listener_flannelWireguard" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "flannelWireguard"
+    "port"         = 51820
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sagent-ILB_Listener_kubeapiserver" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "kubeapiserver"
+    "port"         = 6443
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sagent-ILB_Listener_wireguardVxlan" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "wireguardVxlan"
+    "port"         = 8472
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sagent-ILB_Listener_https" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "https"
+    "port"         = 443
+    "protocol"     = "TCP"
+  }
+}
+variable "k3sagent-ILB_Listener_metrics" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "metrics"
+    "port"         = 10250
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sagent-ILB_Listener_flannelWireguard" {
+  type = object({
+    display_name = string
+    port         = number
+    protocol     = string
+  })
+  default = {
+    "display_name" = "flannelWireguard"
+    "port"         = 51820
+    "protocol"     = "TCP"
+  }
+}
+
+variable "k3sagent-ILB_Listener_connection_configuration" {
+  description = "TCP connection properties"
+  type        = map(any)
+  default = {
+    idle_timeout_in_seconds            = 30
+    backend_tcp_proxy_protocol_version = 2
+  }
 }
 
 #K3s DB - Internal LB - Parameters

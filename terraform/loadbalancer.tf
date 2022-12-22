@@ -108,53 +108,142 @@ resource "oci_load_balancer_backend_set" "k3sdb-ILB-BackendSet" {
   policy           = var.k3sdb-ILB_BackendSet_policy
 }
 
-# #K3sserver Listeners
-# resource "oci_load_balancer_listener" "k3sserver" {
-#   #Required
-#   default_backend_set_name = oci_load_balancer_backend_set.test_backend_set.name
-#   load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-lb.id
-#   name                     = var.k3sserver-ILB_Listener_display_name-kubeapiserver
-#   port                     = var.k3sserver-ILB_Listener_port-kubeapiserver
-#   protocol                 = var.k3sserver-ILB_Listener_protocol-kubeapiserver
+#K3s Server Listeners
+resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_6443" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                     = var.k3sserver-ILB_Listener_kubeapiserver.display_name
+  port                     = var.k3sserver-ILB_Listener_kubeapiserver.port
+  protocol                 = var.k3sserver-ILB_Listener_kubeapiserver.protocol
 
-#   #Optional
-#   connection_configuration = var.k3sserver-ILB_Listener_connection_configuration
-#   routing_policy_name      = oci_load_balancer_load_balancer_routing_policy.test_load_balancer_routing_policy.name
-#   rule_set_names           = [oci_load_balancer_rule_set.test_rule_set.name]
-#   #TODO:
-#   ssl_configuration {
-#     #Optional
-#     certificate_name                  = oci_load_balancer_certificate.test_certificate.name
-#     certificate_ids                   = var.listener_ssl_configuration_certificate_ids
-#     cipher_suite_name                 = var.listener_ssl_configuration_cipher_suite_name
-#     protocols                         = var.listener_ssl_configuration_protocols
-#     server_order_preference           = var.listener_ssl_configuration_server_order_preference
-#     trusted_certificate_authority_ids = var.listener_ssl_configuration_trusted_certificate_authority_ids
-#     verify_depth                      = var.listener_ssl_configuration_verify_depth
-#     verify_peer_certificate           = var.listener_ssl_configuration_verify_peer_certificate
-#   }
-# }
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sserver-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sserver-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
 
-# #create Backend set
-# #routing_policy_name = oci_load_balancer_load_balancer_routing_policy.test_load_balancer_routing_policy.name
-# #create ruleset
+resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_8472" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                     = var.k3sserver-ILB_Listener_wireguardVxlan.display_name
+  port                     = var.k3sserver-ILB_Listener_wireguardVxlan.port
+  protocol                 = var.k3sserver-ILB_Listener_wireguardVxlan.protocol
 
-# variable "k3sserver-ILB_Listener_display_name-kubeapiserver" {
-#   type    = string
-#   default = "kubeapiserver"
-# }
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sserver-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sserver-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
 
-# variable "k3sserver-ILB_Listener_port-kubeapiserver" {
-#   description = "Agents need to reach this port for registration to the cluster"
-#   type        = number
-#   default     = 6443
-# }
+resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_10250" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                     = var.k3sserver-ILB_Listener_metrics.display_name
+  port                     = var.k3sserver-ILB_Listener_metrics.port
+  protocol                 = var.k3sserver-ILB_Listener_metrics.protocol
 
-# variable "k3sserver-ILB_Listener_protocol-kubeapiserver" {
-#   description = "Agents need to reach this protocol for registration to the cluster"
-#   type        = string
-#   default     = "TCP"
-# }
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sserver-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sserver-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_51820" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                     = var.k3sserver-ILB_Listener_flannelWireguard.display_name
+  port                     = var.k3sserver-ILB_Listener_flannelWireguard.port
+  protocol                 = var.k3sserver-ILB_Listener_flannelWireguard.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sserver-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sserver-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+#K3s Agent Listeners
+resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_443" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listener_https.display_name
+  port                     = var.k3sagent-ILB_Listener_https.port
+  protocol                 = var.k3sagent-ILB_Listener_https.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sagent-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sagent-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_6443" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listener_kubeapiserver.display_name
+  port                     = var.k3sagent-ILB_Listener_kubeapiserver.port
+  protocol                 = var.k3sagent-ILB_Listener_kubeapiserver.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sagent-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sagent-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_8472" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listener_wireguardVxlan.display_name
+  port                     = var.k3sagent-ILB_Listener_wireguardVxlan.port
+  protocol                 = var.k3sagent-ILB_Listener_wireguardVxlan.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sagent-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sagent-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_10250" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listener_metrics.display_name
+  port                     = var.k3sagent-ILB_Listener_metrics.port
+  protocol                 = var.k3sagent-ILB_Listener_metrics.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sagent-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sagent-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
+resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_51820" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listener_flannelWireguard.display_name
+  port                     = var.k3sagent-ILB_Listener_flannelWireguard.port
+  protocol                 = var.k3sagent-ILB_Listener_flannelWireguard.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sagent-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sagent-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
 
 # variable "k3sserver-ILB_Listener_default_backend_set_name" {
 #   description = "K3s Servers backend set"
@@ -162,14 +251,6 @@ resource "oci_load_balancer_backend_set" "k3sdb-ILB-BackendSet" {
 #   default     = "k3s server backends"
 # }
 
-# variable "k3sserver-ILB_Listener_connection_configuration" {
-#   description = "TCP connection properties"
-#   type        = map(any)
-#   default = {
-#     idle_timeout_in_seconds            = 30
-#     backend_tcp_proxy_protocol_version = 2
-#   }
-# }
 
 # variable "k3sserver-ILB_BackendSet_hc-kubeapiserver" {
 #   description = "Internal LB healthchecks towards kubeapiserver"

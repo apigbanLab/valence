@@ -129,7 +129,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_tcp
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
+resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql01" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
@@ -144,7 +144,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_pos
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql" {
+resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Ingress_postgresql02" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "INGRESS"
@@ -187,7 +187,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer01" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
@@ -202,7 +202,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   }
 }
 
-resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer" {
+resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_kubeapiServer02" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
