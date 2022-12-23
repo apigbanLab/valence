@@ -245,6 +245,22 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_51820" {
   }
 }
 
+#K3s DB Listeners
+resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_5432" {
+  #Required
+  default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+  load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
+  name                     = var.k3sDB-ILB_Listeners.postgresql.display_name
+  port                     = var.k3sDB-ILB_Listeners.postgresql.port
+  protocol                 = var.k3sDB-ILB_Listeners.postgresql.protocol
+
+  #Optional
+  connection_configuration {
+    idle_timeout_in_seconds            = var.k3sserver-ILB_Listener_connection_configuration.idle_timeout_in_seconds
+    backend_tcp_proxy_protocol_version = var.k3sserver-ILB_Listener_connection_configuration.backend_tcp_proxy_protocol_version
+  }
+}
+
 # variable "k3sserver-ILB_Listener_default_backend_set_name" {
 #   description = "K3s Servers backend set"
 #   type        = string

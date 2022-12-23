@@ -459,6 +459,25 @@ variable "k3sdb-ILB_BackendSet_policy" {
   default = "ROUND_ROBIN"
 }
 
+variable "k3sDB-ILB_Listeners" {
+  type = object({
+    postgresql = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+  })
+  default = {
+    postgresql = {
+      "display_name" = "postgresql"
+      "port"         = 5432
+      "protocol"     = "TCP"
+    }
+  }
+}
+
 # K3s Server Instance Configuration parameters
 
 variable "IC_display_name-k3sserver" {
