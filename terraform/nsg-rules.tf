@@ -75,10 +75,10 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
-  protocol                  = "6"
+  protocol                  = "17"
   source                    = "10.0.0.0/8"
   source_type               = "CIDR_BLOCK"
-  tcp_options {
+  udp_options {
     destination_port_range {
       max = 51820
       min = 51820
@@ -90,10 +90,10 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
-  protocol                  = "6"
+  protocol                  = "17"
   source                    = "10.0.0.0/8"
   source_type               = "CIDR_BLOCK"
-  tcp_options {
+  udp_options {
     destination_port_range {
       max = 8472
       min = 8472
@@ -251,10 +251,10 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
-  protocol                  = "6"
+  protocol                  = "17"
   source                    = "10.0.0.0/8"
   source_type               = "CIDR_BLOCK"
-  tcp_options {
+  udp_options {
     destination_port_range {
       max = 8472
       min = 8472
@@ -266,10 +266,10 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Ingress_
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "INGRESS"
-  protocol                  = "6"
+  protocol                  = "17"
   source                    = "10.0.0.0/8"
   source_type               = "CIDR_BLOCK"
-  tcp_options {
+  udp_options {
     destination_port_range {
       max = 51820
       min = 51820
