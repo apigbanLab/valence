@@ -128,9 +128,9 @@ resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_8472" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
-  name                     = var.k3sserver-ILB_Listener_wireguardVxlan.display_name
-  port                     = var.k3sserver-ILB_Listener_wireguardVxlan.port
-  protocol                 = var.k3sserver-ILB_Listener_wireguardVxlan.protocol
+  name                     = var.k3sagent-ILB_Listeners.wireguardvxlan.display_name
+  port                     = var.k3sagent-ILB_Listeners.wireguardvxlan.port
+  protocol                 = var.k3sagent-ILB_Listeners.wireguardvxlan.protocol
 
   #Optional
   connection_configuration {
@@ -143,9 +143,9 @@ resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_10250" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
-  name                     = var.k3sserver-ILB_Listener_metrics.display_name
-  port                     = var.k3sserver-ILB_Listener_metrics.port
-  protocol                 = var.k3sserver-ILB_Listener_metrics.protocol
+  name                     = var.k3sagent-ILB_Listeners.metrics.display_name
+  port                     = var.k3sagent-ILB_Listeners.metrics.port
+  protocol                 = var.k3sagent-ILB_Listeners.metrics.protocol
 
   #Optional
   connection_configuration {
@@ -158,9 +158,9 @@ resource "oci_load_balancer_listener" "k3sserver-ILB_Listener_51820" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sserver-ILB.id
-  name                     = var.k3sserver-ILB_Listener_flannelWireguard.display_name
-  port                     = var.k3sserver-ILB_Listener_flannelWireguard.port
-  protocol                 = var.k3sserver-ILB_Listener_flannelWireguard.protocol
+  name                     = var.k3sagent-ILB_Listeners.wireguardflannel.display_name
+  port                     = var.k3sagent-ILB_Listeners.wireguardflannel.port
+  protocol                 = var.k3sagent-ILB_Listeners.wireguardflannel.protocol
 
   #Optional
   connection_configuration {
@@ -174,9 +174,9 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_443" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
-  name                     = var.k3sagent-ILB_Listener_https.display_name
-  port                     = var.k3sagent-ILB_Listener_https.port
-  protocol                 = var.k3sagent-ILB_Listener_https.protocol
+  name                     = var.k3sagent-ILB_Listeners.https.display_name
+  port                     = var.k3sagent-ILB_Listeners.https.port
+  protocol                 = var.k3sagent-ILB_Listeners.https.protocol
 
   #Optional
   connection_configuration {
@@ -189,9 +189,9 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_6443" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
-  name                     = var.k3sagent-ILB_Listener_kubeapiserver.display_name
-  port                     = var.k3sagent-ILB_Listener_kubeapiserver.port
-  protocol                 = var.k3sagent-ILB_Listener_kubeapiserver.protocol
+  name                     = var.k3sagent-ILB_Listeners.kubeapiserver.display_name
+  port                     = var.k3sagent-ILB_Listeners.kubeapiserver.port
+  protocol                 = var.k3sagent-ILB_Listeners.kubeapiserver.protocol
 
   #Optional
   connection_configuration {
@@ -204,9 +204,9 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_8472" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
-  name                     = var.k3sagent-ILB_Listener_wireguardVxlan.display_name
-  port                     = var.k3sagent-ILB_Listener_wireguardVxlan.port
-  protocol                 = var.k3sagent-ILB_Listener_wireguardVxlan.protocol
+  name                     = var.k3sagent-ILB_Listeners.wireguardvxlan.display_name
+  port                     = var.k3sagent-ILB_Listeners.wireguardvxlan.port
+  protocol                 = var.k3sagent-ILB_Listeners.wireguardvxlan.protocol
 
   #Optional
   connection_configuration {
@@ -219,9 +219,9 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_10250" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
-  name                     = var.k3sagent-ILB_Listener_metrics.display_name
-  port                     = var.k3sagent-ILB_Listener_metrics.port
-  protocol                 = var.k3sagent-ILB_Listener_metrics.protocol
+  name                     = var.k3sagent-ILB_Listeners.metrics.display_name
+  port                     = var.k3sagent-ILB_Listeners.metrics.port
+  protocol                 = var.k3sagent-ILB_Listeners.metrics.protocol
 
   #Optional
   connection_configuration {
@@ -234,9 +234,9 @@ resource "oci_load_balancer_listener" "k3sagent-ILB_Listener_51820" {
   #Required
   default_backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   load_balancer_id         = oci_load_balancer_load_balancer.k3sagent-ILB.id
-  name                     = var.k3sagent-ILB_Listener_flannelWireguard.display_name
-  port                     = var.k3sagent-ILB_Listener_flannelWireguard.port
-  protocol                 = var.k3sagent-ILB_Listener_flannelWireguard.protocol
+  name                     = var.k3sagent-ILB_Listeners.wireguardflannel.display_name
+  port                     = var.k3sagent-ILB_Listeners.wireguardflannel.port
+  protocol                 = var.k3sagent-ILB_Listeners.wireguardflannel.protocol
 
   #Optional
   connection_configuration {

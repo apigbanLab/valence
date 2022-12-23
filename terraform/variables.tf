@@ -410,6 +410,73 @@ variable "k3sagent-ILB_Listener_flannelWireguard" {
   }
 }
 
+variable "k3sagent-ILB_Listeners" {
+  type = object({
+    wireguardflannel = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    metrics = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    https = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    wireguardvxlan = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    kubeapiserver = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+  })
+  default = {
+    wireguardflannel = {
+      "display_name" = "wireguardflannel"
+      "port"         = 51820
+      "protocol"     = "TCP"
+    }
+    metrics = {
+      "display_name" = "metrics"
+      "port"         = 10250
+      "protocol"     = "TCP"
+    }
+    https = {
+      "display_name" = "https"
+      "port"         = 443
+      "protocol"     = "TCP"
+    }
+    wireguardvxlan = {
+      "display_name" = "wireguardVxlan"
+      "port"         = 8472
+      "protocol"     = "TCP"
+    }
+    kubeapiserver = {
+      "display_name" = "kubeapiserver"
+      "port"         = 6443
+      "protocol"     = "TCP"
+    }
+  }
+}
+
 variable "k3sagent-ILB_Listener_connection_configuration" {
   description = "TCP connection properties"
   type        = map(any)
