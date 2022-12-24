@@ -1,5 +1,4 @@
 resource "oci_network_load_balancer_network_load_balancer" "k3sserver-ILB" {
-  #Required
   compartment_id                 = var.provider_compartment_id
   display_name                   = var.k3sserver-ILB_display_name
   subnet_id                      = oci_core_subnet.subnet_k3s-server.id
@@ -10,7 +9,6 @@ resource "oci_network_load_balancer_network_load_balancer" "k3sserver-ILB" {
 }
 
 resource "oci_network_load_balancer_network_load_balancer" "k3sagent-ILB" {
-  #Required
   compartment_id                 = var.provider_compartment_id
   display_name                   = var.k3sagent-ILB_display_name
   subnet_id                      = oci_core_subnet.subnet_k3s-agent.id
@@ -21,7 +19,6 @@ resource "oci_network_load_balancer_network_load_balancer" "k3sagent-ILB" {
 }
 
 resource "oci_network_load_balancer_network_load_balancer" "k3sdb-ILB" {
-  #Required
   compartment_id                 = var.provider_compartment_id
   display_name                   = var.k3sdb-ILB_display_name
   subnet_id                      = oci_core_subnet.subnet_k3s-db.id
@@ -31,51 +28,41 @@ resource "oci_network_load_balancer_network_load_balancer" "k3sdb-ILB" {
   nlb_ip_version                 = "IPV4"
 }
 
-resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
-  #Required
+resource "oci_network_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
+  is_preserve_source = true
+  ip_version         = "IPv4"
   health_checker {
-    #Required
-    protocol = "HTTP"
-
-    #Optional
+    protocol          = "HTTPS"
     interval_ms       = 10000
     port              = 6443
     retries           = 3
     return_code       = 200
     timeout_in_millis = 2000
-    url_path          = "/readyz"
+    url_path          = "/ping"
   }
   load_balancer_id = oci_load_balancer_load_balancer.k3sserver-ILB.id
   name             = var.k3sserver-ILB_BackendSet_name
   policy           = var.k3sserver-ILB_BackendSet_policy
 }
 
-resource "oci_load_balancer_backend_set" "k3sagent-ILB-BackendSet" {
-  #Required
+resource "oci_network_load_balancer_backend_set" "k3sagent-ILB-BackendSet" {
   health_checker {
-    #Required
     protocol = "HTTP"
-
-    #Optional
     interval_ms       = 10000
     port              = 6443
     retries           = 3
     return_code       = 200
     timeout_in_millis = 2000
-    url_path          = "/readyz"
+    url_path          = "/ping"
   }
   load_balancer_id = oci_load_balancer_load_balancer.k3sagent-ILB.id
   name             = var.k3sagent-ILB_BackendSet_name
   policy           = var.k3sagent-ILB_BackendSet_policy
 }
 
-resource "oci_load_balancer_backend_set" "k3sdb-ILB-BackendSet" {
-  #Required
+resource "oci_network_load_balancer_backend_set" "k3sdb-ILB-BackendSet" {
   health_checker {
-    #Required
     protocol = "TCP"
-
-    #Optional
     interval_ms       = 10000
     port              = 5432
     retries           = 3

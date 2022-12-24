@@ -225,7 +225,7 @@ variable "k3sserver-ILB_BackendSet_name" {
 
 variable "k3sserver-ILB_BackendSet_policy" {
   type    = string
-  default = "ROUND_ROBIN"
+  default = "FIVE_TUPLE"
 }
 
 # variable "k3sserver-ILB_Listener_display_name-kubeapiserver" {
