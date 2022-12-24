@@ -1,57 +1,35 @@
-resource "oci_load_balancer_load_balancer" "k3sserver-ILB" {
+resource "oci_network_load_balancer_network_load_balancer" "k3sserver-ILB" {
   #Required
-  compartment_id = var.provider_compartment_id
-  display_name   = var.k3sserver-ILB_display_name
-  shape          = var.k3sserver-ILB_shape
-  subnet_ids     = [oci_core_subnet.subnet_k3s-server.id]
-
-  #Optional
-  ip_mode                    = var.k3sserver-ILB_ip_mode
-  is_private                 = var.k3sserver-ILB_is_private
-  network_security_group_ids = [oci_core_network_security_group.k3s-server_nsg.id]
-
-  shape_details {
-    maximum_bandwidth_in_mbps = var.k3sserver-ILB_shape_details.maximum_bandwidth_in_mbps
-    minimum_bandwidth_in_mbps = var.k3sserver-ILB_shape_details.minimum_bandwidth_in_mbps
-  }
+  compartment_id                 = var.provider_compartment_id
+  display_name                   = var.k3sserver-ILB_display_name
+  subnet_id                      = oci_core_subnet.subnet_k3s-server.id
+  is_preserve_source_destination = true
+  is_private                     = true
+  network_security_group_ids     = [oci_core_network_security_group.k3s-server_nsg.id]
+  nlb_ip_version                 = "IPV4"
 }
 
-resource "oci_load_balancer_load_balancer" "k3sagent-ILB" {
+resource "oci_network_load_balancer_network_load_balancer" "k3sagent-ILB" {
   #Required
-  compartment_id = var.provider_compartment_id
-  display_name   = var.k3sagent-ILB_display_name
-  shape          = var.k3sagent-ILB_shape
-  subnet_ids     = [oci_core_subnet.subnet_k3s-agent.id]
-
-  #Optional
-  ip_mode                    = var.k3sagent-ILB_ip_mode
-  is_private                 = var.k3sagent-ILB_is_private
-  network_security_group_ids = [oci_core_network_security_group.k3s-agent_nsg.id]
-
-  shape_details {
-    maximum_bandwidth_in_mbps = var.k3sagent-ILB_shape_details.maximum_bandwidth_in_mbps
-    minimum_bandwidth_in_mbps = var.k3sagent-ILB_shape_details.minimum_bandwidth_in_mbps
-  }
+  compartment_id                 = var.provider_compartment_id
+  display_name                   = var.k3sagent-ILB_display_name
+  subnet_id                      = oci_core_subnet.subnet_k3s-agent.id
+  is_preserve_source_destination = true
+  is_private                     = true
+  network_security_group_ids     = [oci_core_network_security_group.k3s-agent_nsg.id]
+  nlb_ip_version                 = "IPV4"
 }
 
-resource "oci_load_balancer_load_balancer" "k3sdb-ILB" {
+resource "oci_network_load_balancer_network_load_balancer" "k3sdb-ILB" {
   #Required
-  compartment_id = var.provider_compartment_id
-  display_name   = var.k3sdb-ILB_display_name
-  shape          = var.k3sdb-ILB_shape
-  subnet_ids     = [oci_core_subnet.subnet_k3s-db.id]
-
-  #Optional
-  ip_mode                    = var.k3sdb-ILB_ip_mode
-  is_private                 = var.k3sdb-ILB_is_private
-  network_security_group_ids = [oci_core_network_security_group.k3s-db_nsg.id]
-
-  shape_details {
-    maximum_bandwidth_in_mbps = var.k3sdb-ILB_shape_details.maximum_bandwidth_in_mbps
-    minimum_bandwidth_in_mbps = var.k3sdb-ILB_shape_details.minimum_bandwidth_in_mbps
-  }
+  compartment_id                 = var.provider_compartment_id
+  display_name                   = var.k3sdb-ILB_display_name
+  subnet_id                      = oci_core_subnet.subnet_k3s-db.id
+  is_preserve_source_destination = true
+  is_private                     = true
+  network_security_group_ids     = [oci_core_network_security_group.k3s-db_nsg.id]
+  nlb_ip_version                 = "IPV4"
 }
-
 
 resource "oci_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
   #Required
