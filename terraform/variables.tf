@@ -196,7 +196,7 @@ variable "k3sserver-ILB_Listeners" {
     wireguardflannel = {
       "display_name" = "wireguardflannel"
       "port"         = 51820
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     metrics = {
       "display_name" = "metrics"
@@ -211,7 +211,7 @@ variable "k3sserver-ILB_Listeners" {
     wireguardvxlan = {
       "display_name" = "wireguardVxlan"
       "port"         = 8472
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     kubeapiserver = {
       "display_name" = "kubeapiserver"
@@ -270,7 +270,7 @@ variable "k3sagent-ILB_Listeners" {
     wireguardflannel = {
       "display_name" = "wireguardflannel"
       "port"         = 51820
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     metrics = {
       "display_name" = "metrics"
@@ -290,7 +290,7 @@ variable "k3sagent-ILB_Listeners" {
     wireguardvxlan = {
       "display_name" = "wireguardVxlan"
       "port"         = 8472
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     kubeapiserver = {
       "display_name" = "kubeapiserver"

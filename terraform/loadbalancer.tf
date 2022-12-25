@@ -47,7 +47,7 @@ resource "oci_network_load_balancer_backend_set" "k3sserver-ILB-BackendSet" {
 
 resource "oci_network_load_balancer_backend_set" "k3sagent-ILB-BackendSet" {
   health_checker {
-    protocol           = "HTTP"
+    protocol           = "HTTPS"
     interval_in_millis = 10000
     port               = 6443
     retries            = 3
