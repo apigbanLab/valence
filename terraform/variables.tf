@@ -1,6 +1,3 @@
-# Copyright (c) 2019, 2021, Oracle Corporation and/or affiliates.
-# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
-
 # provider identity parameters
 # general oci parameters
 
@@ -15,21 +12,6 @@ variable "provider_label_prefix" {
   type        = string
   default     = "terraform-oci"
 }
-
-# variable "tags_freeform" {
-#   description = "simple key-value pairs to tag the created resources using freeform OCI Free-form tags."
-#   type        = map(any)
-#   default = {
-#     terraformed = "please do not edit manually"
-#     module      = "oracle-terraform-modules/vcn/oci"
-#   }
-# }
-
-# variable "tags_defined" {
-#   description = "predefined and scoped to a namespace to tag the resources created using defined tags."
-#   type        = map(string)
-#   default     = null
-# }
 
 # vcn parameters
 
@@ -50,12 +32,6 @@ variable "create_service_gateway" {
   type        = bool
   default     = false
 }
-
-# variable "enable_ipv6" {
-#   description = "Whether IPv6 is enabled for the VCN. If enabled, Oracle will assign the VCN a IPv6 /56 CIDR block."
-#   type        = bool
-#   default     = false
-# }
 
 variable "lockdown_default_seclist" {
   description = "whether to remove all default security rules from the VCN Default Security List"
@@ -89,24 +65,11 @@ variable "attached_drg_id" {
   default     = null
 }
 
-
 variable "internet_gateway_display_name" {
   description = "(Updatable) Name of Internet Gateway. Does not have to be unique."
   type        = string
   default     = "igw"
 }
-
-# variable "nat_gateway_display_name" {
-#   description = "(Updatable) Name of NAT Gateway. Does not have to be unique."
-#   type        = string
-#   default     = "ngw"
-# }
-
-# variable "service_gateway_display_name" {
-#   description = "(Updatable) Name of Service Gateway. Does not have to be unique."
-#   type        = string
-#   default     = "sgw"
-# }
 
 # k3s-agent subnet parameters
 variable "subnet_k3s-agent_cidr_block" {
@@ -159,63 +122,10 @@ variable "subnet_k3s-db_prohibit_public_ip_on_vnic" {
   default     = false
 }
 
-# Internet enabled Route table  parameters
-# variable "route_igw_display_name" {
-#   type    = string
-#   default = "igw"
-# }
-
-# variable "route_igw_target_cidr_block" {
-#   type    = string
-#   default = "0.0.0.0/0"
-# }
-
-# variable "sec_icmp_access" {
-#   description = "A list of CIDR blocks to which access to wireguard access will be restricted to. *anywhere* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere."
-#   default     = ["anywhere"]
-#   type        = list(any)
-# }
-
-# variable "sec_netnum" {
-#   description = "0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value."
-#   default     = 3
-#   type        = number
-# }
-
-# variable "sec_newbits" {
-#   description = "The difference between the VCN's netmask and the desired subnet mask"
-#   default     = 13
-#   type        = number
-# }
-
 #K3s Server - Internal LB - Parameters
 variable "k3sserver-ILB_display_name" {
   type    = string
   default = "k3sserver-ILB"
-}
-
-variable "k3sserver-ILB_shape" {
-  type    = string
-  default = "flexible"
-}
-
-variable "k3sserver-ILB_ip_mode" {
-  type    = string
-  default = "IPV4"
-}
-
-variable "k3sserver-ILB_is_private" {
-  type    = bool
-  default = true
-}
-
-variable "k3sserver-ILB_shape_details" {
-  description = "The shape details of the internal load balancer."
-  type        = map(any)
-  default = {
-    maximum_bandwidth_in_mbps = 10
-    minimum_bandwidth_in_mbps = 10
-  }
 }
 
 variable "k3sserver-ILB_BackendSet_name" {
@@ -228,60 +138,10 @@ variable "k3sserver-ILB_BackendSet_policy" {
   default = "FIVE_TUPLE"
 }
 
-# variable "k3sserver-ILB_Listener_display_name-kubeapiserver" {
-#   type    = string
-#   default = "kubeapiserver"
-# }
-
-# variable "k3sserver-ILB_Listener_port-kubeapiserver" {
-#   description = "Agents need to reach this port for registration to the cluster"
-#   type        = number
-#   default     = 6443
-# }
-
-# variable "k3sserver-ILB_Listener_protocol-kubeapiserver" {
-#   description = "Agents need to reach this protocol for registration to the cluster"
-#   type        = string
-#   default     = "TCP"
-# }
-
-variable "k3sserver-ILB_Listener_connection_configuration" {
-  description = "TCP connection properties"
-  type        = map(any)
-  default = {
-    idle_timeout_in_seconds            = 30
-    backend_tcp_proxy_protocol_version = 2
-  }
-}
-
 #K3s Agent - Internal LB - Parameters
 variable "k3sagent-ILB_display_name" {
   type    = string
   default = "k3sagent-ILB"
-}
-
-variable "k3sagent-ILB_shape" {
-  type    = string
-  default = "flexible"
-}
-
-variable "k3sagent-ILB_ip_mode" {
-  type    = string
-  default = "IPV4"
-}
-
-variable "k3sagent-ILB_is_private" {
-  type    = bool
-  default = true
-}
-
-variable "k3sagent-ILB_shape_details" {
-  description = "The shape details of the internal load balancer."
-  type        = map(any)
-  default = {
-    maximum_bandwidth_in_mbps = 10
-    minimum_bandwidth_in_mbps = 10
-  }
 }
 
 variable "k3sagent-ILB_BackendSet_name" {
@@ -294,119 +154,70 @@ variable "k3sagent-ILB_BackendSet_policy" {
   default = "ROUND_ROBIN"
 }
 
-variable "k3sserver-ILB_Listener_kubeapiserver" {
+variable "k3sserver-ILB_Listeners" {
   type = object({
-    display_name = string
-    port         = number
-    protocol     = string
+    wireguardflannel = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    metrics = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    https = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    wireguardvxlan = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    kubeapiserver = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
   })
   default = {
-    "display_name" = "kubeapiserver"
-    "port"         = 6443
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sserver-ILB_Listener_wireguardVxlan" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "wireguardVxlan"
-    "port"         = 8472
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sserver-ILB_Listener_metrics" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "metrics"
-    "port"         = 10250
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sserver-ILB_Listener_flannelWireguard" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "flannelWireguard"
-    "port"         = 51820
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sagent-ILB_Listener_kubeapiserver" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "kubeapiserver"
-    "port"         = 6443
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sagent-ILB_Listener_wireguardVxlan" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "wireguardVxlan"
-    "port"         = 8472
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sagent-ILB_Listener_https" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "https"
-    "port"         = 443
-    "protocol"     = "TCP"
-  }
-}
-variable "k3sagent-ILB_Listener_metrics" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "metrics"
-    "port"         = 10250
-    "protocol"     = "TCP"
-  }
-}
-
-variable "k3sagent-ILB_Listener_flannelWireguard" {
-  type = object({
-    display_name = string
-    port         = number
-    protocol     = string
-  })
-  default = {
-    "display_name" = "flannelWireguard"
-    "port"         = 51820
-    "protocol"     = "TCP"
+    wireguardflannel = {
+      "display_name" = "wireguardflannel"
+      "port"         = 51820
+      "protocol"     = "TCP"
+    }
+    metrics = {
+      "display_name" = "metrics"
+      "port"         = 10250
+      "protocol"     = "TCP"
+    }
+    https = {
+      "display_name" = "https"
+      "port"         = 443
+      "protocol"     = "TCP"
+    }
+    wireguardvxlan = {
+      "display_name" = "wireguardVxlan"
+      "port"         = 8472
+      "protocol"     = "TCP"
+    }
+    kubeapiserver = {
+      "display_name" = "kubeapiserver"
+      "port"         = 6443
+      "protocol"     = "TCP"
+    }
   }
 }
 
@@ -477,43 +288,10 @@ variable "k3sagent-ILB_Listeners" {
   }
 }
 
-variable "k3sagent-ILB_Listener_connection_configuration" {
-  description = "TCP connection properties"
-  type        = map(any)
-  default = {
-    idle_timeout_in_seconds            = 30
-    backend_tcp_proxy_protocol_version = 2
-  }
-}
-
 #K3s DB - Internal LB - Parameters
 variable "k3sdb-ILB_display_name" {
   type    = string
   default = "k3sdb-ILB"
-}
-
-variable "k3sdb-ILB_shape" {
-  type    = string
-  default = "flexible"
-}
-
-variable "k3sdb-ILB_ip_mode" {
-  type    = string
-  default = "IPV4"
-}
-
-variable "k3sdb-ILB_is_private" {
-  type    = bool
-  default = true
-}
-
-variable "k3sdb-ILB_shape_details" {
-  description = "The shape details of the internal load balancer."
-  type        = map(any)
-  default = {
-    maximum_bandwidth_in_mbps = 10
-    minimum_bandwidth_in_mbps = 10
-  }
 }
 
 variable "k3sdb-ILB_BackendSet_name" {

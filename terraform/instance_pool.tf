@@ -8,8 +8,8 @@ resource "oci_core_instance_pool" "IP-k3sserver" {
   size         = var.k3sserver-IP_size
   display_name = var.k3sserver-IP_display_name
   load_balancers {
-    backend_set_name = oci_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
-    load_balancer_id = oci_load_balancer_load_balancer.k3sserver-ILB.id
+    backend_set_name = oci_network_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+    load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sserver-ILB.id
     port             = 6443
     vnic_selection   = "PrimaryVnic"
   }
@@ -28,8 +28,8 @@ resource "oci_core_instance_pool" "IP-k3sagent" {
   size         = var.k3sagent-IP_size
   display_name = var.k3sagent-IP_display_name
   load_balancers {
-    backend_set_name = oci_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
-    load_balancer_id = oci_load_balancer_load_balancer.k3sagent-ILB.id
+    backend_set_name = oci_network_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+    load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sagent-ILB.id
     port             = 6443
     vnic_selection   = "PrimaryVnic"
   }
@@ -48,8 +48,8 @@ resource "oci_core_instance_pool" "IP-k3sdb" {
   size         = var.k3sdb-IP_size
   display_name = var.k3sdb-IP_display_name
   load_balancers {
-    backend_set_name = oci_load_balancer_backend_set.k3sdb-ILB-BackendSet.name
-    load_balancer_id = oci_load_balancer_load_balancer.k3sdb-ILB.id
+    backend_set_name = oci_network_load_balancer_backend_set.k3sdb-ILB-BackendSet.name
+    load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sdb-ILB.id
     port             = 5432
     vnic_selection   = "PrimaryVnic"
   }
