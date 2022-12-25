@@ -107,6 +107,14 @@ resource "oci_network_load_balancer_listener" "k3sserver-ILB_Listener_51820" {
 }
 
 #K3s Agent Listeners
+resource "oci_network_load_balancer_listener" "k3sagent-ILB_Listener_80" {
+  default_backend_set_name = oci_network_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+  network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sagent-ILB.id
+  name                     = var.k3sagent-ILB_Listeners.https.display_name
+  port                     = var.k3sagent-ILB_Listeners.https.port
+  protocol                 = var.k3sagent-ILB_Listeners.https.protocol
+}
+
 resource "oci_network_load_balancer_listener" "k3sagent-ILB_Listener_443" {
   default_backend_set_name = oci_network_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sagent-ILB.id

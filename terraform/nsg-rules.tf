@@ -16,6 +16,34 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "INGRESS"
   protocol                  = "6"
+  source                    = "0.0.0.0/0"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    destination_port_range {
+      max = 80
+      min = 80
+    }
+  }
+}
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_tcpAll" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = "0.0.0.0/0"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    destination_port_range {
+      max = 443
+      min = 443
+    }
+  }
+}
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_tcpAll" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
   source                    = "${var.workstation_publicIPAddress}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {

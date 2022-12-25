@@ -237,6 +237,13 @@ variable "k3sagent-ILB_Listeners" {
         protocol     = string
       }
     )
+    http = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )    
     https = object(
       {
         display_name = string
@@ -268,6 +275,11 @@ variable "k3sagent-ILB_Listeners" {
     metrics = {
       "display_name" = "metrics"
       "port"         = 10250
+      "protocol"     = "TCP"
+    }
+    http = {
+      "display_name" = "http"
+      "port"         = 80
       "protocol"     = "TCP"
     }
     https = {
