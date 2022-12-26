@@ -8,9 +8,9 @@ resource "oci_core_instance_pool" "IP-k3sserver" {
   size         = var.k3sserver-IP_size
   display_name = var.k3sserver-IP_display_name
   load_balancers {
-    backend_set_name = oci_network_load_balancer_backend_set.k3sserver-ILB-BackendSet.name
+    backend_set_name = oci_network_load_balancer_backend_set.k3sserver-ILB-BackendSet_HTTPS6443.name
     load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sserver-ILB.id
-    port             = 6443
+    port             = var.k3sserver-ILB_Listeners.kubeapiserver.port
     vnic_selection   = "PrimaryVnic"
   }
   provisioner "local-exec" {
@@ -28,9 +28,9 @@ resource "oci_core_instance_pool" "IP-k3sagent" {
   size         = var.k3sagent-IP_size
   display_name = var.k3sagent-IP_display_name
   load_balancers {
-    backend_set_name = oci_network_load_balancer_backend_set.k3sagent-ILB-BackendSet.name
+    backend_set_name = oci_network_load_balancer_backend_set.k3sagent-ILB-BackendSet_HTTPS6443.name
     load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sagent-ILB.id
-    port             = 6443
+    port             = var.k3sagent-ILB_Listeners.kubeapiserver.port
     vnic_selection   = "PrimaryVnic"
   }
   provisioner "local-exec" {
@@ -48,9 +48,9 @@ resource "oci_core_instance_pool" "IP-k3sdb" {
   size         = var.k3sdb-IP_size
   display_name = var.k3sdb-IP_display_name
   load_balancers {
-    backend_set_name = oci_network_load_balancer_backend_set.k3sdb-ILB-BackendSet.name
+    backend_set_name = oci_network_load_balancer_backend_set.k3sdb-ILB-BackendSet_TCP5432.name
     load_balancer_id = oci_network_load_balancer_network_load_balancer.k3sdb-ILB.id
-    port             = 5432
+    port             = var.k3sDB-ILB_Listeners.postgresql.port
     vnic_selection   = "PrimaryVnic"
   }
   provisioner "local-exec" {
