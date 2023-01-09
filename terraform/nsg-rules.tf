@@ -5,12 +5,40 @@ resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Egress"
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
   direction                 = "EGRESS"
-  protocol                  = "6"
+  protocol                  = "all"
   destination               = "0.0.0.0/0"
   destination_type          = "CIDR_BLOCK"
 }
 
 # INGRESS
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_80" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = "0.0.0.0/0"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    destination_port_range {
+      max = 80
+      min = 80
+    }
+  }
+}
+resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_443" {
+  #checkov:skip=CKV_OCI_21: Stateful rules are applied
+  network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
+  direction                 = "INGRESS"
+  protocol                  = "6"
+  source                    = "0.0.0.0/0"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    destination_port_range {
+      max = 443
+      min = 443
+    }
+  }
+}
 resource "oci_core_network_security_group_security_rule" "k3s-server_nsg_Ingress_tcpAll" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-server_nsg.id
@@ -107,7 +135,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-db_nsg_Egress" {
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-db_nsg.id
   direction                 = "EGRESS"
-  protocol                  = "6"
+  protocol                  = "all"
   destination               = "0.0.0.0/0"
   destination_type          = "CIDR_BLOCK"
 }
@@ -165,7 +193,7 @@ resource "oci_core_network_security_group_security_rule" "k3s-agent_nsg_Egress" 
   #checkov:skip=CKV_OCI_21: Stateful rules are applied
   network_security_group_id = oci_core_network_security_group.k3s-agent_nsg.id
   direction                 = "EGRESS"
-  protocol                  = "6"
+  protocol                  = "all"
   destination               = "0.0.0.0/0"
   destination_type          = "CIDR_BLOCK"
 }

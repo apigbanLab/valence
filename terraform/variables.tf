@@ -128,11 +128,6 @@ variable "k3sserver-ILB_display_name" {
   default = "k3sserver-ILB"
 }
 
-variable "k3sserver-ILB_BackendSet_name" {
-  type    = string
-  default = "k3s-servers"
-}
-
 variable "k3sserver-ILB_BackendSet_policy" {
   type    = string
   default = "FIVE_TUPLE"
@@ -144,14 +139,9 @@ variable "k3sagent-ILB_display_name" {
   default = "k3sagent-ILB"
 }
 
-variable "k3sagent-ILB_BackendSet_name" {
-  type    = string
-  default = "k3s-agents"
-}
-
 variable "k3sagent-ILB_BackendSet_policy" {
   type    = string
-  default = "ROUND_ROBIN"
+  default = "FIVE_TUPLE"
 }
 
 variable "k3sserver-ILB_Listeners" {
@@ -186,9 +176,10 @@ variable "k3sserver-ILB_Listeners" {
     )
     kubeapiserver = object(
       {
-        display_name = string
-        port         = number
-        protocol     = string
+        display_name            = string
+        port                    = number
+        protocol                = string
+        be_healthcheck_protocol = string
       }
     )
   })
@@ -196,7 +187,7 @@ variable "k3sserver-ILB_Listeners" {
     wireguardflannel = {
       "display_name" = "wireguardflannel"
       "port"         = 51820
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     metrics = {
       "display_name" = "metrics"
@@ -211,12 +202,13 @@ variable "k3sserver-ILB_Listeners" {
     wireguardvxlan = {
       "display_name" = "wireguardVxlan"
       "port"         = 8472
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     kubeapiserver = {
-      "display_name" = "kubeapiserver"
-      "port"         = 6443
-      "protocol"     = "TCP"
+      "display_name"            = "kubeapiserver"
+      "port"                    = 6443
+      "protocol"                = "TCP"
+      "be_healthcheck_protocol" = "HTTPS"
     }
   }
 }
@@ -231,6 +223,13 @@ variable "k3sagent-ILB_Listeners" {
       }
     )
     metrics = object(
+      {
+        display_name = string
+        port         = number
+        protocol     = string
+      }
+    )
+    http = object(
       {
         display_name = string
         port         = number
@@ -253,9 +252,10 @@ variable "k3sagent-ILB_Listeners" {
     )
     kubeapiserver = object(
       {
-        display_name = string
-        port         = number
-        protocol     = string
+        display_name            = string
+        port                    = number
+        protocol                = string
+        be_healthcheck_protocol = string
       }
     )
   })
@@ -263,11 +263,16 @@ variable "k3sagent-ILB_Listeners" {
     wireguardflannel = {
       "display_name" = "wireguardflannel"
       "port"         = 51820
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     metrics = {
       "display_name" = "metrics"
       "port"         = 10250
+      "protocol"     = "TCP"
+    }
+    http = {
+      "display_name" = "http"
+      "port"         = 80
       "protocol"     = "TCP"
     }
     https = {
@@ -278,12 +283,13 @@ variable "k3sagent-ILB_Listeners" {
     wireguardvxlan = {
       "display_name" = "wireguardVxlan"
       "port"         = 8472
-      "protocol"     = "TCP"
+      "protocol"     = "UDP"
     }
     kubeapiserver = {
-      "display_name" = "kubeapiserver"
-      "port"         = 6443
-      "protocol"     = "TCP"
+      "display_name"            = "kubeapiserver"
+      "port"                    = 6443
+      "protocol"                = "TCP"
+      "be_healthcheck_protocol" = "HTTPS"
     }
   }
 }
@@ -294,14 +300,9 @@ variable "k3sdb-ILB_display_name" {
   default = "k3sdb-ILB"
 }
 
-variable "k3sdb-ILB_BackendSet_name" {
-  type    = string
-  default = "k3s-dbs"
-}
-
 variable "k3sdb-ILB_BackendSet_policy" {
   type    = string
-  default = "ROUND_ROBIN"
+  default = "FIVE_TUPLE"
 }
 
 variable "k3sDB-ILB_Listeners" {
