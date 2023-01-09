@@ -698,6 +698,21 @@ variable "k3sdb-IP_size" {
   default = 1
 }
 
+variable "k3sdb-IP_role" {
+  type    = string
+  default = "external_datastore"
+}
+
+variable "k3sserver-IP_role" {
+  type    = string
+  default = "controlplane"
+}
+
+variable "k3sagent-IP_role" {
+  type    = string
+  default = "worker"
+}
+
 #K3s DB Autoscaling Parameters
 variable "k3sdb-ASC_target_type" {
   type    = string

@@ -16,6 +16,9 @@ resource "oci_core_instance_pool" "IP-k3sserver" {
   provisioner "local-exec" {
     command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey"
   }
+  freeform_tags = {
+    "role" = var.k3sserver-IP_role
+  }
 }
 
 resource "oci_core_instance_pool" "IP-k3sagent" {
@@ -36,6 +39,9 @@ resource "oci_core_instance_pool" "IP-k3sagent" {
   provisioner "local-exec" {
     command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey"
   }
+  freeform_tags = {
+    "role" = var.k3sagent-IP_role
+  }
 }
 
 resource "oci_core_instance_pool" "IP-k3sdb" {
@@ -55,5 +61,8 @@ resource "oci_core_instance_pool" "IP-k3sdb" {
   }
   provisioner "local-exec" {
     command = "echo '${tls_private_key.ssh_key.private_key_openssh}' > oci.privkey"
+  }
+  freeform_tags = {
+    "role" = var.k3sdb-IP_role
   }
 }
