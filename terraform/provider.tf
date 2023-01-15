@@ -2,7 +2,7 @@ terraform {
   required_providers {
     oci = {
       source  = "oracle/oci"
-      version = ">= 4.0.0"
+      version = "4.103.0"
     }
     tls = {
       source  = "hashicorp/tls"
@@ -16,6 +16,16 @@ terraform {
       source  = "hashicorp/cloudinit"
       version = "2.2.0"
     }
+  }
+  backend "s3" {
+    bucket                      = "terraformstate"
+    key                         = "valence/terraform.tfstate"
+    region                      = "me-dubai-1"
+    endpoint                    = "https://axafm68tcvts.compat.objectstorage.me-dubai-1.oraclecloud.com"
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_metadata_api_check     = true
+    force_path_style            = true
   }
   required_version = ">=v1.3.0"
 }
